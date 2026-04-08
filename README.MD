@@ -19,16 +19,21 @@ So basic initialization looks like
 Power cycle PCAM --> Load initial PCAM config --> Load vid/pic specific config (1920*1080@30fps) --> Initialize VDMA + demosaic --> Start camera --> Success?
 
 
-Hardware is roughly
+---
 
-      (AXI)                         (MM witchcraft)
- IIC <─────── MPSoC/PS <─────────────────────────────────┐
-  |            Ʌ                                         |
-  | (IIC)      ├───────────────────────────┐             |
-  |            | (AXI)          |          |             |
-  V            V                V          V             |
-PCAM5C ──> MIPI CSI-2 RX ──> Demosaic ──> VDMA ──> MAIN MEMORY (DDR)
-  (Dual lane)             (All of these are AXI4-Stream)
+## Hardware Pipeline
+
+        (AXI)                          (Memory / DDR)
+   IIC <─────── MPSoC / PS <──────────────────────────────┐
+    │            ▲                                         │
+    │ (IIC)      │                                         │
+    │            ├───────────────┐                         │
+    ▼            ▼               ▼                         ▼
+
+ PCAM5C ──▶ MIPI CSI-2 RX ──▶ Demosaic ──▶ VDMA ──▶ DDR
+ (Dual lane)                (AXI4-Stream pipeline)
+
+---
 
 
 Feel free to contribute since this is mind-numbingly hard to figure out. PYNQ files (if not present already) will be added shortly along with specific vivado version, board specs and anything else that I think might be useful.
