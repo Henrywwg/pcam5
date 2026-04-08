@@ -27,12 +27,11 @@ Power cycle PCAM --> Load initial PCAM config --> Load vid/pic specific config (
 ## Hardware Pipeline
 
         (AXI)                          (Memory / DDR)
-   IIC <─────── MPSoC / PS <──────────────────────────────┐
-    │            ▲                                         │
-    │ (IIC)      │                                         │
-    │            ├───────────────┐                         │
-    ▼            ▼               ▼                         ▼
-
+   IIC <─────── MPSoC / PS <───────────────────────────┐
+    │            ▲                                     │
+    │ (IIC)      │                                     │
+    │            ├───────────────┐                     │
+    ▼            ▼               ▼                     ▼
  PCAM5C ──▶ MIPI CSI-2 RX ──▶ Demosaic ──▶ VDMA ──▶ DDR
  (Dual lane)                (AXI4-Stream pipeline)
 
