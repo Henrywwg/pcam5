@@ -296,7 +296,7 @@
                 "MI": "M_AXI_HPM0_FPD",
                 "MS": "SEG_v_demosaic_0_Reg",
                 "MV": "xilinx.com:ip:zynq_ultra_ps_e:3.5",
-                "SX": "/v_demosaic_0",
+                "SX": "/vdemo",
                 "SI": "s_axi_CTRL",
                 "SS": "Reg",
                 "SV": "xilinx.com:ip:v_demosaic:1.1",

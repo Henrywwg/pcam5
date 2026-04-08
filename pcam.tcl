@@ -139,6 +139,7 @@ xilinx.com:ip:proc_sys_reset:5.0\
 xilinx.com:ip:axi_vdma:6.3\
 xilinx.com:ip:smartconnect:1.0\
 xilinx.com:ip:axi_gpio:2.0\
+xilinx.com:ip:axis_subset_converter:1.1\
 "
 
    set list_ips_missing ""
@@ -499,6 +500,7 @@ Port;FD4A0000;FD4AFFFF;1|FPD;DPDMA;FD4C0000;FD4CFFFF;1|FPD;DDR_XMPU5_CFG;FD05000
   set_property -dict [list \
     CONFIG.CLK_LANE_IO_LOC {AD5} \
     CONFIG.CMN_NUM_LANES {2} \
+    CONFIG.CMN_PXL_FORMAT {RAW10} \
     CONFIG.DATA_LANE0_IO_LOC {AG3} \
     CONFIG.DATA_LANE1_IO_LOC {AG4} \
     CONFIG.DPY_LINE_RATE {672} \
@@ -506,29 +508,30 @@ Port;FD4A0000;FD4AFFFF;1|FPD;DPDMA;FD4C0000;FD4CFFFF;1|FPD;DDR_XMPU5_CFG;FD05000
   ] $mipi_csi2_rx_subsyst_0
 
 
-  # Create instance: v_demosaic_0, and set properties
-  set v_demosaic_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:v_demosaic:1.1 v_demosaic_0 ]
+  # Create instance: vdemo, and set properties
+  set vdemo [ create_bd_cell -type ip -vlnv xilinx.com:ip:v_demosaic:1.1 vdemo ]
   set_property -dict [list \
     CONFIG.MAX_COLS {1920} \
+    CONFIG.MAX_DATA_WIDTH {10} \
     CONFIG.MAX_ROWS {1080} \
-  ] $v_demosaic_0
+  ] $vdemo
 
 
   # Create instance: clk_wiz_0, and set properties
   set clk_wiz_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:clk_wiz:6.0 clk_wiz_0 ]
   set_property -dict [list \
-    CONFIG.CLKOUT1_JITTER {127.241} \
-    CONFIG.CLKOUT1_PHASE_ERROR {231.456} \
-    CONFIG.CLKOUT1_REQUESTED_OUT_FREQ {148.5} \
-    CONFIG.CLKOUT2_JITTER {122.795} \
-    CONFIG.CLKOUT2_PHASE_ERROR {231.456} \
+    CONFIG.CLKOUT1_JITTER {92.855} \
+    CONFIG.CLKOUT1_PHASE_ERROR {79.592} \
+    CONFIG.CLKOUT1_REQUESTED_OUT_FREQ {175} \
+    CONFIG.CLKOUT2_JITTER {90.666} \
+    CONFIG.CLKOUT2_PHASE_ERROR {79.592} \
     CONFIG.CLKOUT2_REQUESTED_OUT_FREQ {200.000} \
     CONFIG.CLKOUT2_USED {true} \
     CONFIG.CLK_OUT1_PORT {clk_VID} \
-    CONFIG.MMCM_CLKFBOUT_MULT_F {111.750} \
-    CONFIG.MMCM_CLKOUT0_DIVIDE_F {10.750} \
-    CONFIG.MMCM_CLKOUT1_DIVIDE {8} \
-    CONFIG.MMCM_DIVCLK_DIVIDE {7} \
+    CONFIG.MMCM_CLKFBOUT_MULT_F {14.000} \
+    CONFIG.MMCM_CLKOUT0_DIVIDE_F {8.000} \
+    CONFIG.MMCM_CLKOUT1_DIVIDE {7} \
+    CONFIG.MMCM_DIVCLK_DIVIDE {1} \
     CONFIG.NUM_OUT_CLKS {2} \
     CONFIG.RESET_PORT {resetn} \
     CONFIG.RESET_TYPE {ACTIVE_LOW} \
@@ -538,15 +541,12 @@ Port;FD4A0000;FD4AFFFF;1|FPD;DPDMA;FD4C0000;FD4CFFFF;1|FPD;DDR_XMPU5_CFG;FD05000
   # Create instance: sys_rst_vid, and set properties
   set sys_rst_vid [ create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset:5.0 sys_rst_vid ]
 
-  # Create instance: sys_rst_csi, and set properties
-  set sys_rst_csi [ create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset:5.0 sys_rst_csi ]
-
   # Create instance: axi_vdma_0, and set properties
   set axi_vdma_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_vdma:6.3 axi_vdma_0 ]
   set_property -dict [list \
     CONFIG.c_include_mm2s {0} \
     CONFIG.c_num_fstores {4} \
-    CONFIG.c_s2mm_linebuffer_depth {2048} \
+    CONFIG.c_s2mm_linebuffer_depth {8192} \
   ] $axi_vdma_0
 
 
@@ -568,18 +568,59 @@ Port;FD4A0000;FD4AFFFF;1|FPD;DPDMA;FD4C0000;FD4CFFFF;1|FPD;DDR_XMPU5_CFG;FD05000
   set_property CONFIG.C_GPIO_WIDTH {1} $axi_gpio_0
 
 
+  # Create instance: axis_subset_converter_0, and set properties
+  set axis_subset_converter_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_subset_converter:1.1 axis_subset_converter_0 ]
+  set_property -dict [list \
+    CONFIG.M_HAS_TKEEP {1} \
+    CONFIG.M_HAS_TLAST {1} \
+    CONFIG.M_HAS_TREADY {1} \
+    CONFIG.M_HAS_TSTRB {1} \
+    CONFIG.M_TDATA_NUM_BYTES {3} \
+    CONFIG.M_TDEST_WIDTH {1} \
+    CONFIG.M_TID_WIDTH {1} \
+    CONFIG.M_TUSER_WIDTH {1} \
+    CONFIG.S_HAS_TKEEP {1} \
+    CONFIG.S_HAS_TLAST {1} \
+    CONFIG.S_HAS_TREADY {1} \
+    CONFIG.S_HAS_TSTRB {1} \
+    CONFIG.S_TDATA_NUM_BYTES {4} \
+    CONFIG.S_TDEST_WIDTH {1} \
+    CONFIG.S_TID_WIDTH {1} \
+    CONFIG.S_TUSER_WIDTH {1} \
+    CONFIG.TDATA_REMAP {tdata[29:22],tdata[19:12],tdata[9:2]} \
+  ] $axis_subset_converter_0
+
+  set_property -dict [list \
+    CONFIG.M_HAS_TKEEP.VALUE_MODE {auto} \
+    CONFIG.M_HAS_TLAST.VALUE_MODE {auto} \
+    CONFIG.M_HAS_TREADY.VALUE_MODE {auto} \
+    CONFIG.M_HAS_TSTRB.VALUE_MODE {auto} \
+    CONFIG.M_TDEST_WIDTH.VALUE_MODE {auto} \
+    CONFIG.M_TID_WIDTH.VALUE_MODE {auto} \
+    CONFIG.M_TUSER_WIDTH.VALUE_MODE {auto} \
+    CONFIG.S_HAS_TKEEP.VALUE_MODE {auto} \
+    CONFIG.S_HAS_TLAST.VALUE_MODE {auto} \
+    CONFIG.S_HAS_TREADY.VALUE_MODE {auto} \
+    CONFIG.S_HAS_TSTRB.VALUE_MODE {auto} \
+    CONFIG.S_TDEST_WIDTH.VALUE_MODE {auto} \
+    CONFIG.S_TID_WIDTH.VALUE_MODE {auto} \
+    CONFIG.S_TUSER_WIDTH.VALUE_MODE {auto} \
+  ] $axis_subset_converter_0
+
+
   # Create interface connections
   connect_bd_intf_net -intf_net axi_iic_0_IIC [get_bd_intf_ports IIC_0] [get_bd_intf_pins axi_iic_0/IIC]
   connect_bd_intf_net -intf_net axi_smc_1_M00_AXI [get_bd_intf_pins axi_smc_1/M00_AXI] [get_bd_intf_pins zynq_ultra_ps_e_0/S_AXI_HPC0_FPD]
   connect_bd_intf_net -intf_net axi_smc_M00_AXI [get_bd_intf_pins axi_smc/M00_AXI] [get_bd_intf_pins axi_iic_0/S_AXI]
   connect_bd_intf_net -intf_net axi_smc_M01_AXI [get_bd_intf_pins axi_smc/M01_AXI] [get_bd_intf_pins axi_vdma_0/S_AXI_LITE]
   connect_bd_intf_net -intf_net axi_smc_M02_AXI [get_bd_intf_pins axi_smc/M02_AXI] [get_bd_intf_pins mipi_csi2_rx_subsyst_0/csirxss_s_axi]
-  connect_bd_intf_net -intf_net axi_smc_M03_AXI [get_bd_intf_pins axi_smc/M03_AXI] [get_bd_intf_pins v_demosaic_0/s_axi_CTRL]
+  connect_bd_intf_net -intf_net axi_smc_M03_AXI [get_bd_intf_pins axi_smc/M03_AXI] [get_bd_intf_pins vdemo/s_axi_CTRL]
   connect_bd_intf_net -intf_net axi_smc_M04_AXI [get_bd_intf_pins axi_smc/M04_AXI] [get_bd_intf_pins axi_gpio_0/S_AXI]
   connect_bd_intf_net -intf_net axi_vdma_0_M_AXI_S2MM [get_bd_intf_pins axi_vdma_0/M_AXI_S2MM] [get_bd_intf_pins axi_smc_1/S00_AXI]
-  connect_bd_intf_net -intf_net mipi_csi2_rx_subsyst_0_video_out [get_bd_intf_pins mipi_csi2_rx_subsyst_0/video_out] [get_bd_intf_pins v_demosaic_0/s_axis_video]
+  connect_bd_intf_net -intf_net axis_subset_converter_0_M_AXIS [get_bd_intf_pins axis_subset_converter_0/M_AXIS] [get_bd_intf_pins axi_vdma_0/S_AXIS_S2MM]
+  connect_bd_intf_net -intf_net mipi_csi2_rx_subsyst_0_video_out [get_bd_intf_pins mipi_csi2_rx_subsyst_0/video_out] [get_bd_intf_pins vdemo/s_axis_video]
   connect_bd_intf_net -intf_net mipi_phy_if_0_1 [get_bd_intf_ports mipi_phy_if_0] [get_bd_intf_pins mipi_csi2_rx_subsyst_0/mipi_phy_if]
-  connect_bd_intf_net -intf_net v_demosaic_0_m_axis_video [get_bd_intf_pins axi_vdma_0/S_AXIS_S2MM] [get_bd_intf_pins v_demosaic_0/m_axis_video]
+  connect_bd_intf_net -intf_net vdemo_m_axis_video [get_bd_intf_pins vdemo/m_axis_video] [get_bd_intf_pins axis_subset_converter_0/S_AXIS]
   connect_bd_intf_net -intf_net zynq_ultra_ps_e_0_M_AXI_HPM0_FPD [get_bd_intf_pins zynq_ultra_ps_e_0/M_AXI_HPM0_FPD] [get_bd_intf_pins axi_smc/S00_AXI]
 
   # Create port connections
@@ -590,7 +631,7 @@ Port;FD4A0000;FD4AFFFF;1|FPD;DPDMA;FD4C0000;FD4CFFFF;1|FPD;DDR_XMPU5_CFG;FD05000
   connect_bd_net -net clk_wiz_0_clk_VID  [get_bd_pins clk_wiz_0/clk_VID] \
   [get_bd_pins axi_iic_0/s_axi_aclk] \
   [get_bd_pins sys_rst_vid/slowest_sync_clk] \
-  [get_bd_pins v_demosaic_0/ap_clk] \
+  [get_bd_pins vdemo/ap_clk] \
   [get_bd_pins axi_vdma_0/s_axi_lite_aclk] \
   [get_bd_pins axi_vdma_0/m_axi_s2mm_aclk] \
   [get_bd_pins axi_vdma_0/s_axis_s2mm_aclk] \
@@ -600,27 +641,26 @@ Port;FD4A0000;FD4AFFFF;1|FPD;DPDMA;FD4C0000;FD4CFFFF;1|FPD;DDR_XMPU5_CFG;FD05000
   [get_bd_pins mipi_csi2_rx_subsyst_0/video_aclk] \
   [get_bd_pins axi_smc/aclk] \
   [get_bd_pins axi_smc_1/aclk] \
-  [get_bd_pins axi_gpio_0/s_axi_aclk]
+  [get_bd_pins axi_gpio_0/s_axi_aclk] \
+  [get_bd_pins axis_subset_converter_0/aclk]
   connect_bd_net -net clk_wiz_0_clk_out2  [get_bd_pins clk_wiz_0/clk_out2] \
-  [get_bd_pins sys_rst_csi/slowest_sync_clk] \
   [get_bd_pins mipi_csi2_rx_subsyst_0/dphy_clk_200M]
   connect_bd_net -net clk_wiz_0_locked  [get_bd_pins clk_wiz_0/locked] \
-  [get_bd_pins sys_rst_csi/dcm_locked] \
   [get_bd_pins sys_rst_vid/dcm_locked]
   connect_bd_net -net proc_sys_reset_0_peripheral_aresetn  [get_bd_pins sys_rst_vid/peripheral_aresetn] \
   [get_bd_pins axi_iic_0/s_axi_aresetn] \
   [get_bd_pins mipi_csi2_rx_subsyst_0/lite_aresetn] \
-  [get_bd_pins v_demosaic_0/ap_rst_n] \
+  [get_bd_pins vdemo/ap_rst_n] \
   [get_bd_pins axi_vdma_0/axi_resetn] \
   [get_bd_pins mipi_csi2_rx_subsyst_0/video_aresetn] \
   [get_bd_pins axi_smc/aresetn] \
   [get_bd_pins axi_smc_1/aresetn] \
-  [get_bd_pins axi_gpio_0/s_axi_aresetn]
+  [get_bd_pins axi_gpio_0/s_axi_aresetn] \
+  [get_bd_pins axis_subset_converter_0/aresetn]
   connect_bd_net -net zynq_ultra_ps_e_0_pl_clk0  [get_bd_pins zynq_ultra_ps_e_0/pl_clk0] \
   [get_bd_pins clk_wiz_0/clk_in1]
   connect_bd_net -net zynq_ultra_ps_e_0_pl_resetn0  [get_bd_pins zynq_ultra_ps_e_0/pl_resetn0] \
   [get_bd_pins sys_rst_vid/ext_reset_in] \
-  [get_bd_pins sys_rst_csi/ext_reset_in] \
   [get_bd_pins clk_wiz_0/resetn]
 
   # Create address segments
@@ -628,7 +668,7 @@ Port;FD4A0000;FD4AFFFF;1|FPD;DPDMA;FD4C0000;FD4CFFFF;1|FPD;DDR_XMPU5_CFG;FD05000
   assign_bd_address -offset 0xA0000000 -range 0x00010000 -target_address_space [get_bd_addr_spaces zynq_ultra_ps_e_0/Data] [get_bd_addr_segs axi_iic_0/S_AXI/Reg] -force
   assign_bd_address -offset 0xA0010000 -range 0x00010000 -target_address_space [get_bd_addr_spaces zynq_ultra_ps_e_0/Data] [get_bd_addr_segs axi_vdma_0/S_AXI_LITE/Reg] -force
   assign_bd_address -offset 0xA0020000 -range 0x00001000 -target_address_space [get_bd_addr_spaces zynq_ultra_ps_e_0/Data] [get_bd_addr_segs mipi_csi2_rx_subsyst_0/csirxss_s_axi/Reg] -force
-  assign_bd_address -offset 0xA0030000 -range 0x00010000 -target_address_space [get_bd_addr_spaces zynq_ultra_ps_e_0/Data] [get_bd_addr_segs v_demosaic_0/s_axi_CTRL/Reg] -force
+  assign_bd_address -offset 0xA0030000 -range 0x00010000 -with_name SEG_v_demosaic_0_Reg -target_address_space [get_bd_addr_spaces zynq_ultra_ps_e_0/Data] [get_bd_addr_segs vdemo/s_axi_CTRL/Reg] -force
   assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces axi_vdma_0/Data_S2MM] [get_bd_addr_segs zynq_ultra_ps_e_0/SAXIGP0/HPC0_DDR_LOW] -force
 
   # Exclude Address Segments

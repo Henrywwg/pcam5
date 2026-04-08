@@ -118,3 +118,279 @@ launch_runs pcam_axi_smc_0_synth_1 pcam_axi_smc_1_0_synth_1 -jobs 16
 wait_on_run pcam_axi_smc_0_synth_1
 wait_on_run pcam_axi_smc_1_0_synth_1
 export_simulation -lib_map_path [list {modelsim=C:/pcam5/pcam5.cache/compile_simlib/modelsim} {questa=C:/pcam5/pcam5.cache/compile_simlib/questa} {riviera=C:/pcam5/pcam5.cache/compile_simlib/riviera} {activehdl=C:/pcam5/pcam5.cache/compile_simlib/activehdl}] -of_objects [get_files C:/pcam5/pcam5.srcs/sources_1/bd/pcam/pcam.bd] -directory C:/pcam5/pcam5.ip_user_files/sim_scripts -ip_user_files_dir C:/pcam5/pcam5.ip_user_files -ipstatic_source_dir C:/pcam5/pcam5.ip_user_files/ipstatic -use_ip_compiled_libs -force -quiet
+reset_run synth_1
+launch_runs synth_1 -jobs 16
+wait_on_run synth_1
+open_run synth_1 -name synth_1
+open_bd_design {C:/pcam5/pcam5.srcs/sources_1/bd/pcam/pcam.bd}
+delete_bd_objs [get_bd_nets mipi_csi2_rx_subsyst_0_clkoutphy_out] [get_bd_ports clkoutphy_out_0]
+delete_bd_objs [get_bd_nets mipi_csi2_rx_subsyst_0_rxbyteclkhs] [get_bd_ports rxbyteclkhs_0]
+delete_bd_objs [get_bd_nets mipi_csi2_rx_subsyst_0_system_rst_out] [get_bd_ports system_rst_out_0]
+delete_bd_objs [get_bd_nets mipi_csi2_rx_subsyst_0_csirxss_csi_irq] [get_bd_ports csirxss_csi_irq_0]
+delete_bd_objs [get_bd_nets mipi_csi2_rx_subsyst_0_pll_lock_out] [get_bd_ports pll_lock_out_0]
+save_bd_design
+reset_run synth_1
+launch_runs synth_1 -jobs 16
+wait_on_run synth_1
+close_bd_design [get_bd_designs pcam]
+close_design
+open_run synth_1 -name synth_1
+set_property IOSTANDARD MIPI_DPHY_DCI [get_ports [list mipi_phy_if_0_clk_p]]
+set_property package_pin "" [get_ports [list  mipi_phy_if_0_clk_p]]
+set_property IOSTANDARD MIPI_DPHY_DCI [get_ports [list mipi_phy_if_0_clk_p]]
+set_property IOSTANDARD MIPI_DPHY_DCI [get_ports [list {mipi_phy_if_0_data_p[1]} {mipi_phy_if_0_data_p[0]} mipi_phy_if_0_clk_p]]
+set_property IOSTANDARD MIPI_DPHY_DCI [get_ports [list mipi_phy_if_0_clk_p]]
+set_property IOSTANDARD LVCMOS12 [get_ports [list IIC_0_scl_io IIC_0_sda_io]]
+set_property package_pin "" [get_ports [list  {mipi_phy_if_0_data_p[0]}]]
+set_property package_pin "" [get_ports [list  {mipi_phy_if_0_data_p[1]}]]
+set_property IOSTANDARD MIPI_DPHY_DCI [get_ports [list mipi_phy_if_0_clk_p]]
+set_property DIFF_TERM_ADV TERM_100 [get_ports [list {mipi_phy_if_0_data_p[1]} {mipi_phy_if_0_data_p[0]} mipi_phy_if_0_clk_p]]
+set_property package_pin "" [get_ports [list  {mipi_phy_if_0_data_p[1]}]]
+place_ports mipi_phy_if_0_clk_p AD5
+set_property package_pin "" [get_ports [list  {mipi_phy_if_0_data_p[1]}]]
+place_ports {mipi_phy_if_0_data_p[0]} AG3
+place_ports {mipi_phy_if_0_data_p[1]} AG4
+save_constraints
+close_design
+open_bd_design {C:/pcam5/pcam5.srcs/sources_1/bd/pcam/pcam.bd}
+startgroup
+create_bd_cell -type inline_hdl -vlnv xilinx.com:inline_hdl:ilconstant:1.0 ilconstant_0
+endgroup
+set_property location {5 1744 -137} [get_bd_cells ilconstant_0]
+startgroup
+make_bd_pins_external  [get_bd_pins ilconstant_0/dout]
+endgroup
+set_property name CAM0_PWUP [get_bd_ports dout_0]
+save_bd_design
+reset_run synth_1
+launch_runs synth_1 -jobs 16
+wait_on_run synth_1
+open_run synth_1 -name synth_1
+place_ports {CAM0_PWUP[0]} J14
+set_property IOSTANDARD LVCMOS12 [get_ports [list {CAM0_PWUP[0]}]]
+set_property SLEW SLOW [get_ports [list IIC_0_scl_io IIC_0_sda_io]]
+save_constraints
+close_design
+launch_runs impl_1 -jobs 16
+wait_on_run impl_1
+startgroup
+set_property -dict [list \
+  CONFIG.CLK_LANE_IO_LOC {AD5} \
+  CONFIG.DATA_LANE1_IO_LOC {AG4} \
+] [get_bd_cells mipi_csi2_rx_subsyst_0]
+endgroup
+set_property location {1 510 -10} [get_bd_cells mipi_csi2_rx_subsyst_0]
+set_property location {1 510 0} [get_bd_cells mipi_csi2_rx_subsyst_0]
+save_bd_design
+reset_target all [get_files  C:/pcam5/pcam5.srcs/sources_1/bd/pcam/pcam.bd]
+export_ip_user_files -of_objects  [get_files  C:/pcam5/pcam5.srcs/sources_1/bd/pcam/pcam.bd] -sync -no_script -force -quiet
+generate_target all [get_files  C:/pcam5/pcam5.srcs/sources_1/bd/pcam/pcam.bd]
+catch { config_ip_cache -export [get_ips -all pcam_zynq_ultra_ps_e_0_0] }
+catch { config_ip_cache -export [get_ips -all pcam_axi_iic_0_0] }
+catch { config_ip_cache -export [get_ips -all pcam_mipi_csi2_rx_subsyst_0_0] }
+catch { config_ip_cache -export [get_ips -all bd_c5b0_phy_0] }
+catch { config_ip_cache -export [get_ips -all bd_c5b0_rx_0] }
+catch { config_ip_cache -export [get_ips -all bd_c5b0_vfb_0_0] }
+catch { config_ip_cache -export [get_ips -all bd_c5b0_r_sync_0] }
+catch { config_ip_cache -export [get_ips -all pcam_v_demosaic_0_0] }
+catch { config_ip_cache -export [get_ips -all pcam_clk_wiz_0_0] }
+catch { config_ip_cache -export [get_ips -all pcam_downscaler_param_0_0] }
+catch { config_ip_cache -export [get_ips -all pcam_proc_sys_reset_0_0] }
+catch { config_ip_cache -export [get_ips -all pcam_proc_sys_reset_1_0] }
+catch { config_ip_cache -export [get_ips -all pcam_axi_vdma_0_0] }
+catch { config_ip_cache -export [get_ips -all pcam_axi_smc_0] }
+catch { config_ip_cache -export [get_ips -all pcam_axi_smc_1_0] }
+export_ip_user_files -of_objects [get_files C:/pcam5/pcam5.srcs/sources_1/bd/pcam/pcam.bd] -no_script -sync -force -quiet
+create_ip_run [get_files -of_objects [get_fileset sources_1] C:/pcam5/pcam5.srcs/sources_1/bd/pcam/pcam.bd]
+launch_runs pcam_mipi_csi2_rx_subsyst_0_0_synth_1 -jobs 16
+wait_on_run pcam_mipi_csi2_rx_subsyst_0_0_synth_1
+export_simulation -lib_map_path [list {modelsim=C:/pcam5/pcam5.cache/compile_simlib/modelsim} {questa=C:/pcam5/pcam5.cache/compile_simlib/questa} {riviera=C:/pcam5/pcam5.cache/compile_simlib/riviera} {activehdl=C:/pcam5/pcam5.cache/compile_simlib/activehdl}] -of_objects [get_files C:/pcam5/pcam5.srcs/sources_1/bd/pcam/pcam.bd] -directory C:/pcam5/pcam5.ip_user_files/sim_scripts -ip_user_files_dir C:/pcam5/pcam5.ip_user_files -ipstatic_source_dir C:/pcam5/pcam5.ip_user_files/ipstatic -use_ip_compiled_libs -force -quiet
+reset_run synth_1
+launch_runs synth_1 -jobs 16
+wait_on_run synth_1
+open_run synth_1 -name synth_1
+launch_runs impl_1 -jobs 16
+wait_on_run impl_1
+reset_run impl_1
+close_design
+reset_run synth_1
+launch_runs synth_1 -jobs 16
+wait_on_run synth_1
+open_run synth_1 -name synth_1
+launch_runs impl_1 -jobs 16
+wait_on_run impl_1
+open_bd_design {C:/pcam5/pcam5.srcs/sources_1/bd/pcam/pcam.bd}
+startgroup
+set_property -dict [list \
+  CONFIG.DATA_LANE0_IO_LOC {AG3} \
+  CONFIG.DATA_LANE1_IO_LOC {AG4} \
+] [get_bd_cells mipi_csi2_rx_subsyst_0]
+endgroup
+save_bd_design
+reset_run synth_1
+reset_run pcam_mipi_csi2_rx_subsyst_0_0_synth_1
+reset_run bd_c5b0_phy_0_synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 16
+wait_on_run impl_1
+write_bd_tcl -force C:/pcam5/pcam.tcl
+startgroup
+create_bd_cell -type ip -vlnv xilinx.com:ip:axi_gpio:2.0 axi_gpio_0
+endgroup
+set_property location {5 1721 -32} [get_bd_cells axi_gpio_0]
+delete_bd_objs [get_bd_nets ilconstant_0_dout] [get_bd_cells ilconstant_0]
+set_property location {4 1781 -132} [get_bd_cells axi_gpio_0]
+startgroup
+make_bd_intf_pins_external  [get_bd_intf_pins axi_gpio_0/GPIO]
+endgroup
+delete_bd_objs [get_bd_ports CAM0_PWUP]
+connect_bd_net [get_bd_pins axi_gpio_0/s_axi_aclk] [get_bd_pins clk_wiz_0/clk_VID]
+connect_bd_net [get_bd_pins axi_gpio_0/s_axi_aresetn] [get_bd_pins sys_rst_vid/peripheral_aresetn]
+apply_bd_automation -rule xilinx.com:bd_rule:axi4 -config { Clk_master {/clk_wiz_0/clk_VID (148 MHz)} Clk_slave {/clk_wiz_0/clk_VID (148 MHz)} Clk_xbar {/clk_wiz_0/clk_VID (148 MHz)} Master {/zynq_ultra_ps_e_0/M_AXI_HPM0_FPD} Slave {/axi_gpio_0/S_AXI} ddr_seg {Auto} intc_ip {/axi_smc} master_apm {0}}  [get_bd_intf_pins axi_gpio_0/S_AXI]
+save_bd_design
+reset_run synth_1
+launch_runs synth_1 -jobs 16
+wait_on_run synth_1
+close_design
+startgroup
+set_property CONFIG.C_GPIO_WIDTH {1} [get_bd_cells axi_gpio_0]
+endgroup
+delete_bd_objs [get_bd_intf_nets axi_gpio_0_GPIO] [get_bd_intf_ports GPIO_0]
+startgroup
+endgroup
+startgroup
+make_bd_pins_external  [get_bd_pins axi_gpio_0/gpio_io_o]
+endgroup
+save_bd_design
+set_property name CAM0_PWUP [get_bd_ports gpio_io_o_0]
+save_bd_design
+reset_run pcam_axi_gpio_0_0_synth_1
+reset_run synth_1
+launch_runs synth_1 -jobs 16
+wait_on_run synth_1
+open_run synth_1 -name synth_1
+launch_runs impl_1 -jobs 16
+wait_on_run impl_1
+launch_runs impl_1 -to_step write_bitstream -jobs 16
+wait_on_run impl_1
+launch_runs impl_1 -to_step write_bitstream -jobs 16
+open_bd_design {C:/pcam5/pcam5.srcs/sources_1/bd/pcam/pcam.bd}
+open_bd_design {C:/pcam5/pcam5.srcs/sources_1/bd/pcam/pcam.bd}
+connect_bd_net [get_bd_pins zynq_ultra_ps_e_0/pl_ps_irq0] [get_bd_pins axi_vdma_0/s2mm_introut]
+open_bd_design {C:/pcam5/pcam5.srcs/sources_1/bd/pcam/pcam.bd}
+startgroup
+set_property CONFIG.DPY_LINE_RATE {672} [get_bd_cells mipi_csi2_rx_subsyst_0]
+endgroup
+save_bd_design
+reset_run synth_1
+reset_run pcam_mipi_csi2_rx_subsyst_0_0_synth_1
+reset_run bd_c5b0_phy_0_synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 16
+wait_on_run impl_1
+reset_run impl_1 -prev_step 
+launch_runs impl_1 -to_step write_bitstream -jobs 16
+wait_on_run impl_1
+set_property location {-10 -70} [get_bd_intf_ports mipi_phy_if_0]
+set_property location {-10 -60} [get_bd_intf_ports mipi_phy_if_0]
+startgroup
+set_property -dict [list \
+  CONFIG.DS_F {8} \
+  CONFIG.OUT_SIZE {128} \
+] [get_bd_cells downscaler_param_0]
+endgroup
+save_bd_design
+reset_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 16
+wait_on_run impl_1
+delete_bd_objs [get_bd_intf_nets downscaler_param_0_m_axis] [get_bd_intf_nets v_demosaic_0_m_axis_video] [get_bd_cells downscaler_param_0]
+connect_bd_intf_net [get_bd_intf_pins axi_vdma_0/S_AXIS_S2MM] [get_bd_intf_pins v_demosaic_0/m_axis_video]
+save_bd_design
+validate_bd_design
+save_bd_design
+reset_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 16
+wait_on_run impl_1
+write_bd_tcl -force C:/pcam5/pcam.tcl
+startgroup
+set_property CONFIG.c_s2mm_linebuffer_depth {8192} [get_bd_cells axi_vdma_0]
+endgroup
+startgroup
+set_property -dict [list \
+  CONFIG.CLKOUT1_JITTER {92.855} \
+  CONFIG.CLKOUT1_PHASE_ERROR {79.592} \
+  CONFIG.CLKOUT1_REQUESTED_OUT_FREQ {175} \
+  CONFIG.CLKOUT2_JITTER {90.666} \
+  CONFIG.CLKOUT2_PHASE_ERROR {79.592} \
+  CONFIG.MMCM_CLKFBOUT_MULT_F {14.000} \
+  CONFIG.MMCM_CLKOUT0_DIVIDE_F {8.000} \
+  CONFIG.MMCM_CLKOUT1_DIVIDE {7} \
+  CONFIG.MMCM_DIVCLK_DIVIDE {1} \
+] [get_bd_cells clk_wiz_0]
+endgroup
+validate_bd_design
+save_bd_design
+reset_run synth_1
+reset_run pcam_mipi_csi2_rx_subsyst_0_0_synth_1
+reset_run bd_c5b0_phy_0_synth_1
+reset_run bd_c5b0_rx_0_synth_1
+reset_run bd_c5b0_vfb_0_0_synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 16
+wait_on_run impl_1
+open_bd_design {C:/pcam5/pcam5.srcs/sources_1/bd/pcam/pcam.bd}
+open_hw_manager
+connect_hw_server -allow_non_jtag
+close_hw_manager
+close_design
+open_hw_manager
+connect_hw_server -allow_non_jtag
+disconnect_hw_server localhost:3121
+connect_hw_server -allow_non_jtag
+open_hw_target
+current_hw_device [get_hw_devices xczu3_0]
+refresh_hw_device -update_hw_probes false [lindex [get_hw_devices xczu3_0] 0]
+current_hw_device [get_hw_devices arm_dap_1]
+refresh_hw_device -update_hw_probes false [lindex [get_hw_devices arm_dap_1] 0]
+current_hw_device [get_hw_devices xczu3_0]
+close_hw_manager
+startgroup
+create_bd_cell -type ip -vlnv xilinx.com:ip:ila:6.2 ila_0
+endgroup
+startgroup
+set_property CONFIG.CMN_PXL_FORMAT {RAW10} [get_bd_cells mipi_csi2_rx_subsyst_0]
+endgroup
+startgroup
+endgroup
+startgroup
+endgroup
+validate_bd_design
+set_property location {3 1196 -264} [get_bd_cells ila_0]
+connect_bd_net [get_bd_pins ila_0/clk] [get_bd_pins clk_wiz_0/clk_VID]
+set_property location {3 1696 185} [get_bd_cells ila_0]
+set_property location {2 1129 104} [get_bd_cells v_demosaic_0]
+delete_bd_objs [get_bd_cells ila_0]
+startgroup
+create_bd_cell -type ip -vlnv xilinx.com:ip:system_ila:1.1 system_ila_0
+endgroup
+set_property location {4 1541 62} [get_bd_cells system_ila_0]
+connect_bd_net [get_bd_pins system_ila_0/resetn] [get_bd_pins sys_rst_vid/peripheral_aresetn]
+connect_bd_net [get_bd_pins system_ila_0/clk] [get_bd_pins clk_wiz_0/clk_VID]
+connect_bd_net [get_bd_pins mipi_csi2_rx_subsyst_0/video_out_tdata] [get_bd_pins system_ila_0/SLOT_0_AXI_rdata]
+startgroup
+set_property CONFIG.C_SLOT_0_INTF_TYPE {xilinx.com:interface:axi4s_vid_if_rtl:1.0} [get_bd_cells system_ila_0]
+delete_bd_objs [get_bd_nets mipi_csi2_rx_subsyst_0_video_out_tdata]
+endgroup
+connect_bd_net [get_bd_pins system_ila_0/SLOT_0_AXI4S_VID_IF_tdata] [get_bd_pins mipi_csi2_rx_subsyst_0/video_out_tdata]
+delete_bd_objs [get_bd_nets mipi_csi2_rx_subsyst_0_video_out_tdata]
+connect_bd_net [get_bd_pins system_ila_0/SLOT_0_AXI4S_VID_IF_tvalid] [get_bd_pins mipi_csi2_rx_subsyst_0/video_out_tvalid]
+connect_bd_net [get_bd_pins system_ila_0/SLOT_0_AXI4S_VID_IF_tdata] [get_bd_pins mipi_csi2_rx_subsyst_0/video_out_tdata]
+connect_bd_net [get_bd_pins system_ila_0/SLOT_0_AXI4S_VID_IF_tlast] [get_bd_pins mipi_csi2_rx_subsyst_0/video_out_tlast]
+connect_bd_net [get_bd_pins system_ila_0/SLOT_0_AXI4S_VID_IF_tuser] [get_bd_pins mipi_csi2_rx_subsyst_0/video_out_tuser]
+connect_bd_net [get_bd_pins system_ila_0/SLOT_0_AXI4S_VID_IF_tready] [get_bd_pins mipi_csi2_rx_subsyst_0/video_out_tready]
+startgroup
+set_property -dict [list \
+  CONFIG.C_DATA_DEPTH {2048} \
+  CONFIG.C_SLOT_0_INTF_TYPE {xilinx.com:interface:axi4s_vid_if_rtl:1.0} \
+] [get_bd_cells system_ila_0]
+endgroup
+validate_bd_design
+delete_bd_objs [get_bd_nets mipi_csi2_rx_subsyst_0_video_out_tuser] [get_bd_nets mipi_csi2_rx_subsyst_0_video_out_tvalid] [get_bd_nets mipi_csi2_rx_subsyst_0_video_out_tdata] [get_bd_nets mipi_csi2_rx_subsyst_0_video_out_tlast] [get_bd_nets Net] [get_bd_cells system_ila_0]
+save_bd_design
