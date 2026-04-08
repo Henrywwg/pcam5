@@ -1,3 +1,6 @@
+
+![Block Diagram](block_diagram.png)
+
 This is an attempt to get the PCAM5 working on an AUP-ZU3 board w/ Vivado 2025.x
 
 Current status from my notes is
