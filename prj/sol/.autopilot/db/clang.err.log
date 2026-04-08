@@ -1,0 +1,7 @@
+C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:102:23: warning: 'Ap_stable' in '#pragma HLS INTERFACE' is deprecated, use 'Stable Pragma' instead [-Wignored-hls-pragmas]
+#pragma HLS INTERFACE ap_stable port=width
+                      ^
+C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:104:23: warning: 'Ap_stable' in '#pragma HLS INTERFACE' is deprecated, use 'Stable Pragma' instead [-Wignored-hls-pragmas]
+#pragma HLS INTERFACE ap_stable port=height
+                      ^
+2 warnings generated.

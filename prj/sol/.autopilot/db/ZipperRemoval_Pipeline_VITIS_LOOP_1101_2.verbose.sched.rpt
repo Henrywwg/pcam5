@@ -1,0 +1,266 @@
+
+
+================================================================
+== Vitis HLS Report for 'ZipperRemoval_Pipeline_VITIS_LOOP_1101_2'
+================================================================
+* Date:           Tue Apr  7 16:03:04 2026
+
+* Version:        2025.2 (Build 6295257 on Nov 12 2025)
+* Project:        prj
+* Solution:       sol (Vivado IP Flow Target)
+* Product family: zynquplus
+* Target device:  xczu3eg-sfvc784-2-e
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+---------+----------+------------+
+    |  Clock |  Target | Estimated| Uncertainty|
+    +--------+---------+----------+------------+
+    |ap_clk  |  6.73 ns|  3.301 ns|     1.82 ns|
+    +--------+---------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+-----------+----------+-----+-----+-------------------+
+    |  Latency (cycles) |  Latency (absolute)  |  Interval |      Pipeline     |
+    |   min   |   max   |    min    |    max   | min | max |        Type       |
+    +---------+---------+-----------+----------+-----+-----+-------------------+
+    |        5|    65540|  33.670 ns|  0.441 ms|    0|    0|  loop pipeline stp|
+    +---------+---------+-----------+----------+-----+-----+-------------------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +---------------------+---------+---------+----------+-----------+-----------+-----------+----------+
+        |                     |  Latency (cycles) | Iteration|  Initiation Interval  |    Trip   |          |
+        |      Loop Name      |   min   |   max   |  Latency |  achieved |   target  |   Count   | Pipelined|
+        +---------------------+---------+---------+----------+-----------+-----------+-----------+----------+
+        |- VITIS_LOOP_1101_2  |        3|    65538|         4|          1|          1|  1 ~ 65536|       yes|
+        +---------------------+---------+---------+----------+-----------+-----------+-----------+----------+
+
+============================================================
++ Verbose Summary: Synthesis Manager
+============================================================
+InlineROM: 1
+ExposeGlobal: 0
+============================================================
++ Verbose Summary: CDFG Model
+============================================================
+IsTopModel: 0
+ResetActiveHigh: 1
+IsCombinational: 0
+IsDatapathOnly: 0
+HasWiredReturn: 1
+HasMFsm: 2
+HasVarLatency: 1
+IsPipeline: 0
+IsRtlPipelined: 0
+IsInstanceOverlapped: 0
+IsDontTouch: 0
+HasImplIP: 0
+IsGatedGlobalClock: 0
+
++ Individual pipeline summary: 
+  * Pipeline-0: initiation interval (II) = 1, depth = 4
+
+
+============================================================
++ Verbose Summary: Schedule
+============================================================
+* Number of FSM states : 4
+* Pipeline : 1
+  Pipeline-0 : II = 1, D = 4, States = { 1 2 3 4 }
+* Dataflow Pipeline: 0
+
+* FSM state transitions: 
+1 --> 2 
+2 --> 3 
+3 --> 4 
+4 --> 
+
+* FSM state operations: 
+
+State 1 <SV = 0> <Delay = 1.71>
+ST_1 : Operation 7 [1/1] (0.00ns)   --->   "%x = alloca i32 1" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1083]   --->   Operation 7 'alloca' 'x' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 8 [1/1] (0.00ns)   --->   "%p_0_0_0507_1697 = alloca i32 1"   --->   Operation 8 'alloca' 'p_0_0_0507_1697' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 9 [1/1] (0.00ns)   --->   "%p_0_0_0506_1698 = alloca i32 1"   --->   Operation 9 'alloca' 'p_0_0_0506_1698' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 10 [1/1] (0.00ns)   --->   "%p_0_0_0505_1701 = alloca i32 1"   --->   Operation 10 'alloca' 'p_0_0_0505_1701' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 11 [1/1] (0.00ns)   --->   "%p_0_0_0504_1704 = alloca i32 1"   --->   Operation 11 'alloca' 'p_0_0_0504_1704' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 12 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i24 %imgRgb, void @empty_20, i32 0, i32 0, void @empty_14, i32 0, i32 0, void @empty_14, void @empty_14, void @empty_14, i32 0, i32 0, i32 0, i32 0, void @empty_14, void @empty_14, i32 4294967295, i32 0, i32 0, i32 0"   --->   Operation 12 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 13 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i24 %imgUnzip, void @empty_20, i32 0, i32 0, void @empty_14, i32 0, i32 0, void @empty_14, void @empty_14, void @empty_14, i32 0, i32 0, i32 0, i32 0, void @empty_14, void @empty_14, i32 4294967295, i32 0, i32 0, i32 0"   --->   Operation 13 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 14 [1/1] (0.00ns)   --->   "%loopWidth_read = read i17 @_ssdm_op_Read.ap_auto.i17, i17 %loopWidth" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1078]   --->   Operation 14 'read' 'loopWidth_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 15 [1/1] (0.00ns)   --->   "%width_val_read = read i16 @_ssdm_op_Read.ap_auto.i16, i16 %width_val" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1078]   --->   Operation 15 'read' 'width_val_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 16 [1/1] (0.00ns)   --->   "%conv2_i_i_lcssa724_read = read i5 @_ssdm_op_Read.ap_auto.i5, i5 %conv2_i_i_lcssa724" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1078]   --->   Operation 16 'read' 'conv2_i_i_lcssa724_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 17 [1/1] (0.00ns)   --->   "%p_0_0_0503692_lcssa699726_read = read i8 @_ssdm_op_Read.ap_auto.i8, i8 %p_0_0_0503692_lcssa699726" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1078]   --->   Operation 17 'read' 'p_0_0_0503692_lcssa699726_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 18 [1/1] (0.00ns)   --->   "%p_0_0_0502688_lcssa702727_read = read i8 @_ssdm_op_Read.ap_auto.i8, i8 %p_0_0_0502688_lcssa702727" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1078]   --->   Operation 18 'read' 'p_0_0_0502688_lcssa702727_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 19 [1/1] (0.00ns)   --->   "%p_0_0_0501690_lcssa705729_read = read i8 @_ssdm_op_Read.ap_auto.i8, i8 %p_0_0_0501690_lcssa705729" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1078]   --->   Operation 19 'read' 'p_0_0_0501690_lcssa705729_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 20 [1/1] (0.00ns)   --->   "%zext_ln1085 = zext i16 %width_val_read" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1085]   --->   Operation 20 'zext' 'zext_ln1085' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 21 [1/1] (0.42ns)   --->   "%store_ln1078 = store i8 %p_0_0_0501690_lcssa705729_read, i8 %p_0_0_0504_1704" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1078]   --->   Operation 21 'store' 'store_ln1078' <Predicate = true> <Delay = 0.42>
+ST_1 : Operation 22 [1/1] (0.42ns)   --->   "%store_ln1078 = store i8 %p_0_0_0502688_lcssa702727_read, i8 %p_0_0_0505_1701" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1078]   --->   Operation 22 'store' 'store_ln1078' <Predicate = true> <Delay = 0.42>
+ST_1 : Operation 23 [1/1] (0.42ns)   --->   "%store_ln1078 = store i8 %p_0_0_0503692_lcssa699726_read, i8 %p_0_0_0506_1698" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1078]   --->   Operation 23 'store' 'store_ln1078' <Predicate = true> <Delay = 0.42>
+ST_1 : Operation 24 [1/1] (0.42ns)   --->   "%store_ln1078 = store i5 %conv2_i_i_lcssa724_read, i5 %p_0_0_0507_1697" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1078]   --->   Operation 24 'store' 'store_ln1078' <Predicate = true> <Delay = 0.42>
+ST_1 : Operation 25 [1/1] (0.42ns)   --->   "%store_ln1083 = store i17 0, i17 %x" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1083]   --->   Operation 25 'store' 'store_ln1083' <Predicate = true> <Delay = 0.42>
+ST_1 : Operation 26 [1/1] (0.42ns)   --->   "%store_ln0 = store i5 0, i5 %phi_ln1132_out"   --->   Operation 26 'store' 'store_ln0' <Predicate = true> <Delay = 0.42>
+ST_1 : Operation 27 [1/1] (0.00ns)   --->   "%br_ln1101 = br void %for.body25" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1101]   --->   Operation 27 'br' 'br_ln1101' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 28 [1/1] (0.00ns)   --->   "%x_1 = load i17 %x" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1101]   --->   Operation 28 'load' 'x_1' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 29 [1/1] (0.86ns)   --->   "%icmp_ln1101 = icmp_eq  i17 %x_1, i17 %loopWidth_read" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1101]   --->   Operation 29 'icmp' 'icmp_ln1101' <Predicate = true> <Delay = 0.86> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 0.86> <FuncUnit> <Opcode : 'seteq' 'setne' 'setle' 'setge' 'setlt' 'setgt'> <InPorts = 2> <OutPorts = 1>
+ST_1 : Operation 30 [1/1] (0.86ns)   --->   "%x_2 = add i17 %x_1, i17 1" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1101]   --->   Operation 30 'add' 'x_2' <Predicate = true> <Delay = 0.86> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 0.86> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_1 : Operation 31 [1/1] (0.00ns)   --->   "%br_ln1101 = br i1 %icmp_ln1101, void %for.body25.split, void %for.inc226.exitStub" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1101]   --->   Operation 31 'br' 'br_ln1101' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 32 [1/1] (0.86ns)   --->   "%icmp_ln1107 = icmp_ult  i17 %x_1, i17 %zext_ln1085" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1107]   --->   Operation 32 'icmp' 'icmp_ln1107' <Predicate = (!icmp_ln1101)> <Delay = 0.86> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 0.86> <FuncUnit> <Opcode : 'seteq' 'setne' 'setle' 'setge' 'setlt' 'setgt'> <InPorts = 2> <OutPorts = 1>
+ST_1 : Operation 33 [1/1] (0.00ns)   --->   "%br_ln1107 = br i1 %icmp_ln1107, void %for.inc_ifconv, void %if.then" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1107]   --->   Operation 33 'br' 'br_ln1107' <Predicate = (!icmp_ln1101)> <Delay = 0.00>
+ST_1 : Operation 34 [1/1] (0.86ns)   --->   "%icmp_ln1159 = icmp_eq  i17 %x_1, i17 0" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1159]   --->   Operation 34 'icmp' 'icmp_ln1159' <Predicate = (!icmp_ln1101)> <Delay = 0.86> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 0.86> <FuncUnit> <Opcode : 'seteq' 'setne' 'setle' 'setge' 'setlt' 'setgt'> <InPorts = 2> <OutPorts = 1>
+ST_1 : Operation 35 [1/1] (0.00ns)   --->   "%br_ln1159 = br i1 %icmp_ln1159, void %if.then221, void %for.inc223" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1159]   --->   Operation 35 'br' 'br_ln1159' <Predicate = (!icmp_ln1101)> <Delay = 0.00>
+ST_1 : Operation 36 [1/1] (0.42ns)   --->   "%store_ln1083 = store i17 %x_2, i17 %x" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1083]   --->   Operation 36 'store' 'store_ln1083' <Predicate = (!icmp_ln1101)> <Delay = 0.42>
+
+State 2 <SV = 1> <Delay = 2.26>
+ST_2 : Operation 37 [1/1] (0.00ns)   --->   "%p_0_0_0506_1698_load = load i8 %p_0_0_0506_1698"   --->   Operation 37 'load' 'p_0_0_0506_1698_load' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 38 [1/1] (0.00ns)   --->   "%p_0_0_0505_1701_load = load i8 %p_0_0_0505_1701"   --->   Operation 38 'load' 'p_0_0_0505_1701_load' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 39 [1/1] (0.00ns)   --->   "%p_0_0_0504_1704_load = load i8 %p_0_0_0504_1704"   --->   Operation 39 'load' 'p_0_0_0504_1704_load' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 40 [1/1] ( I:1.83ns O:1.83ns )   --->   "%imgRgb_read = read i24 @_ssdm_op_Read.ap_fifo.volatile.i24P0A, i24 %imgRgb" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1109]   --->   Operation 40 'read' 'imgRgb_read' <Predicate = (!icmp_ln1101 & icmp_ln1107)> <Delay = 1.83> <CoreInst = "FIFO_SRL">   --->   Core 80 'FIFO_SRL' <Latency = 0> <II = 1> <Delay = 1.83> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = 24> <Depth = 2> <FIFO>
+ST_2 : Operation 41 [1/1] (0.00ns)   --->   "%trunc_ln1109 = trunc i24 %imgRgb_read" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1109]   --->   Operation 41 'trunc' 'trunc_ln1109' <Predicate = (!icmp_ln1101 & icmp_ln1107)> <Delay = 0.00>
+ST_2 : Operation 42 [1/1] (0.00ns)   --->   "%trunc_ln1109_1 = partselect i8 @_ssdm_op_PartSelect.i8.i24.i32.i32, i24 %imgRgb_read, i32 8, i32 15" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1109]   --->   Operation 42 'partselect' 'trunc_ln1109_1' <Predicate = (!icmp_ln1101 & icmp_ln1107)> <Delay = 0.00>
+ST_2 : Operation 43 [1/1] (0.00ns)   --->   "%trunc_ln1109_2 = partselect i8 @_ssdm_op_PartSelect.i8.i24.i32.i32, i24 %imgRgb_read, i32 16, i32 23" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1109]   --->   Operation 43 'partselect' 'trunc_ln1109_2' <Predicate = (!icmp_ln1101 & icmp_ln1107)> <Delay = 0.00>
+ST_2 : Operation 44 [1/1] (0.42ns)   --->   "%store_ln1109 = store i8 %trunc_ln1109_1, i8 %p_0_0_0504_1704" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1109]   --->   Operation 44 'store' 'store_ln1109' <Predicate = (!icmp_ln1101 & icmp_ln1107)> <Delay = 0.42>
+ST_2 : Operation 45 [1/1] (0.42ns)   --->   "%store_ln1109 = store i8 %trunc_ln1109, i8 %p_0_0_0505_1701" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1109]   --->   Operation 45 'store' 'store_ln1109' <Predicate = (!icmp_ln1101 & icmp_ln1107)> <Delay = 0.42>
+ST_2 : Operation 46 [1/1] (0.42ns)   --->   "%store_ln1109 = store i8 %trunc_ln1109_2, i8 %p_0_0_0506_1698" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1109]   --->   Operation 46 'store' 'store_ln1109' <Predicate = (!icmp_ln1101 & icmp_ln1107)> <Delay = 0.42>
+ST_2 : Operation 47 [1/1] (0.00ns)   --->   "%br_ln1110 = br void %for.inc_ifconv" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1110]   --->   Operation 47 'br' 'br_ln1110' <Predicate = (!icmp_ln1101 & icmp_ln1107)> <Delay = 0.00>
+
+State 3 <SV = 2> <Delay = 3.30>
+ST_3 : Operation 48 [1/1] (0.00ns)   --->   "%p_0_0_0507_1697_load_1 = load i5 %p_0_0_0507_1697" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1101]   --->   Operation 48 'load' 'p_0_0_0507_1697_load_1' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 49 [1/1] (0.00ns)   --->   "%zext_ln1101 = zext i5 %p_0_0_0507_1697_load_1" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1101]   --->   Operation 49 'zext' 'zext_ln1101' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 50 [1/1] (0.00ns)   --->   "%specpipeline_ln1104 = specpipeline void @_ssdm_op_SpecPipeline, i32 1, i32 0, i32 0, i32 0, i32 4294967295, void @empty_14" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1104]   --->   Operation 50 'specpipeline' 'specpipeline_ln1104' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 51 [1/1] (0.00ns)   --->   "%speclooptripcount_ln1083 = speclooptripcount void @_ssdm_op_SpecLoopTripCount, i64 1, i64 65536, i64 32768" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1083]   --->   Operation 51 'speclooptripcount' 'speclooptripcount_ln1083' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 52 [1/1] (0.00ns)   --->   "%specloopname_ln1101 = specloopname void @_ssdm_op_SpecLoopName, void @empty_0" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1101]   --->   Operation 52 'specloopname' 'specloopname_ln1101' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 53 [1/1] (0.00ns)   --->   "%p_0_0_0507_1693_out_load = load i8 %p_0_0_0507_1693_out" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1144]   --->   Operation 53 'load' 'p_0_0_0507_1693_out_load' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 54 [1/1] (0.00ns)   --->   "%p_0_0_0506_1694_out_load = load i8 %p_0_0_0506_1694_out" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1147]   --->   Operation 54 'load' 'p_0_0_0506_1694_out_load' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 55 [1/1] (0.00ns)   --->   "%p_0_0_0505_1695_out_load = load i8 %p_0_0_0505_1695_out" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1148]   --->   Operation 55 'load' 'p_0_0_0505_1695_out_load' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 56 [1/1] (0.00ns)   --->   "%p_0_0_0504_1696_out_load = load i8 %p_0_0_0504_1696_out" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1149]   --->   Operation 56 'load' 'p_0_0_0504_1696_out_load' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 57 [1/1] (0.00ns)   --->   "%p_0_0_0507_1697_load = load i5 %p_0_0_0507_1697" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1144]   --->   Operation 57 'load' 'p_0_0_0507_1697_load' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 58 [1/1] (0.00ns)   --->   "%p_0_0_0506_1698_load_1 = load i8 %p_0_0_0506_1698" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1147]   --->   Operation 58 'load' 'p_0_0_0506_1698_load_1' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 59 [1/1] (0.00ns)   --->   "%p_0_0_0505_1701_load_1 = load i8 %p_0_0_0505_1701" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1148]   --->   Operation 59 'load' 'p_0_0_0505_1701_load_1' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 60 [1/1] (0.00ns)   --->   "%p_0_0_0504_1704_load_1 = load i8 %p_0_0_0504_1704" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1149]   --->   Operation 60 'load' 'p_0_0_0504_1704_load_1' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 61 [1/1] (0.00ns)   --->   "%tmp = partselect i6 @_ssdm_op_PartSelect.i6.i8.i32.i32, i8 %p_0_0_0506_1698_load_1, i32 2, i32 7" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1129]   --->   Operation 61 'partselect' 'tmp' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 62 [1/1] (0.00ns)   --->   "%zext_ln1129_1 = zext i6 %tmp" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1129]   --->   Operation 62 'zext' 'zext_ln1129_1' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 63 [1/1] (0.00ns)   --->   "%lshr_ln1129_1 = partselect i7 @_ssdm_op_PartSelect.i7.i8.i32.i32, i8 %p_0_0_0505_1701_load_1, i32 1, i32 7" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1129]   --->   Operation 63 'partselect' 'lshr_ln1129_1' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 64 [1/1] (0.00ns)   --->   "%zext_ln1129_2 = zext i7 %lshr_ln1129_1" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1129]   --->   Operation 64 'zext' 'zext_ln1129_2' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 65 [1/1] (0.00ns)   --->   "%lshr_ln1129_2 = partselect i5 @_ssdm_op_PartSelect.i5.i8.i32.i32, i8 %p_0_0_0505_1701_load_1, i32 3, i32 7" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1129]   --->   Operation 65 'partselect' 'lshr_ln1129_2' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 66 [1/1] (0.00ns)   --->   "%zext_ln1129_3 = zext i5 %lshr_ln1129_2" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1129]   --->   Operation 66 'zext' 'zext_ln1129_3' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 67 [1/1] (0.00ns)   --->   "%tmp_1 = partselect i5 @_ssdm_op_PartSelect.i5.i8.i32.i32, i8 %p_0_0_0504_1704_load_1, i32 3, i32 7" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1129]   --->   Operation 67 'partselect' 'tmp_1' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 68 [1/1] (0.00ns)   --->   "%zext_ln1129_4 = zext i5 %tmp_1" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1129]   --->   Operation 68 'zext' 'zext_ln1129_4' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 69 [1/1] (0.78ns)   --->   "%add_ln1129 = add i7 %zext_ln1129_4, i7 %zext_ln1129_1" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1129]   --->   Operation 69 'add' 'add_ln1129' <Predicate = true> <Delay = 0.78> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 0.78> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_3 : Operation 70 [1/1] (0.00ns)   --->   "%zext_ln1129 = zext i7 %add_ln1129" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1129]   --->   Operation 70 'zext' 'zext_ln1129' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 71 [1/1] (0.00ns) (grouped into TernaryAdder)   --->   "%add_ln1129_1 = add i8 %zext_ln1129, i8 %zext_ln1129_2" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1129]   --->   Operation 71 'add' 'add_ln1129_1' <Predicate = true> <Delay = 0.00> <CoreInst = "TAddSub">   --->   Core 10 'TAddSub' <Latency = 0> <II = 1> <Delay = 0.52> <IPBlock> <Opcode : 'add' 'sub'> <InPorts = 3> <OutPorts = 1> <Sync> <CReg>
+ST_3 : Operation 72 [1/1] (1.05ns) (root node of TernaryAdder)   --->   "%lum = add i8 %add_ln1129_1, i8 %zext_ln1129_3" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1129]   --->   Operation 72 'add' 'lum' <Predicate = true> <Delay = 1.05> <CoreInst = "TAddSub">   --->   Core 10 'TAddSub' <Latency = 0> <II = 1> <Delay = 0.52> <IPBlock> <Opcode : 'add' 'sub'> <InPorts = 3> <OutPorts = 1> <Sync> <CReg>
+ST_3 : Operation 73 [1/1] (0.00ns)   --->   "%trunc_ln1 = partselect i5 @_ssdm_op_PartSelect.i5.i8.i32.i32, i8 %lum, i32 3, i32 7" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1144]   --->   Operation 73 'partselect' 'trunc_ln1' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 74 [1/1] (0.76ns)   --->   "%icmp_ln1144 = icmp_ult  i8 %p_0_0_0507_1693_out_load, i8 %zext_ln1101" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1144]   --->   Operation 74 'icmp' 'icmp_ln1144' <Predicate = true> <Delay = 0.76> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 0.76> <FuncUnit> <Opcode : 'seteq' 'setne' 'setle' 'setge' 'setlt' 'setgt'> <InPorts = 2> <OutPorts = 1>
+ST_3 : Operation 75 [1/1] (0.78ns)   --->   "%icmp_ln1144_1 = icmp_ult  i5 %p_0_0_0507_1697_load, i5 %trunc_ln1" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1144]   --->   Operation 75 'icmp' 'icmp_ln1144_1' <Predicate = true> <Delay = 0.78> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 0.78> <FuncUnit> <Opcode : 'seteq' 'setne' 'setle' 'setge' 'setlt' 'setgt'> <InPorts = 2> <OutPorts = 1>
+ST_3 : Operation 76 [1/1] (0.00ns) (grouped into LUT with out node or_ln1144)   --->   "%xor_ln1144 = xor i1 %icmp_ln1144_1, i1 1" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1144]   --->   Operation 76 'xor' 'xor_ln1144' <Predicate = true> <Delay = 0.00> <CoreInst = "LogicGate">   --->   Core 74 'LogicGate' <Latency = 0> <II = 1> <Delay = 0.28> <FuncUnit> <Opcode : 'and' 'or' 'xor'> <InPorts = 2> <OutPorts = 1>
+ST_3 : Operation 77 [1/1] (0.00ns) (grouped into LUT with out node or_ln1144)   --->   "%and_ln1144 = and i1 %icmp_ln1144, i1 %xor_ln1144" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1144]   --->   Operation 77 'and' 'and_ln1144' <Predicate = true> <Delay = 0.00> <CoreInst = "LogicGate">   --->   Core 74 'LogicGate' <Latency = 0> <II = 1> <Delay = 0.28> <FuncUnit> <Opcode : 'and' 'or' 'xor'> <InPorts = 2> <OutPorts = 1>
+ST_3 : Operation 78 [1/1] (0.76ns)   --->   "%icmp_ln1144_2 = icmp_ult  i8 %p_0_0_0507_1693_out_load, i8 %zext_ln1101" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1144]   --->   Operation 78 'icmp' 'icmp_ln1144_2' <Predicate = true> <Delay = 0.76> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 0.76> <FuncUnit> <Opcode : 'seteq' 'setne' 'setle' 'setge' 'setlt' 'setgt'> <InPorts = 2> <OutPorts = 1>
+ST_3 : Operation 79 [1/1] (0.00ns) (grouped into LUT with out node or_ln1144)   --->   "%xor_ln1144_1 = xor i1 %icmp_ln1144_2, i1 1" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1144]   --->   Operation 79 'xor' 'xor_ln1144_1' <Predicate = true> <Delay = 0.00> <CoreInst = "LogicGate">   --->   Core 74 'LogicGate' <Latency = 0> <II = 1> <Delay = 0.28> <FuncUnit> <Opcode : 'and' 'or' 'xor'> <InPorts = 2> <OutPorts = 1>
+ST_3 : Operation 80 [1/1] (0.78ns)   --->   "%icmp_ln1144_3 = icmp_ult  i5 %p_0_0_0507_1697_load, i5 %trunc_ln1" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1144]   --->   Operation 80 'icmp' 'icmp_ln1144_3' <Predicate = true> <Delay = 0.78> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 0.78> <FuncUnit> <Opcode : 'seteq' 'setne' 'setle' 'setge' 'setlt' 'setgt'> <InPorts = 2> <OutPorts = 1>
+ST_3 : Operation 81 [1/1] (0.00ns) (grouped into LUT with out node or_ln1144)   --->   "%and_ln1144_1 = and i1 %xor_ln1144_1, i1 %icmp_ln1144_3" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1144]   --->   Operation 81 'and' 'and_ln1144_1' <Predicate = true> <Delay = 0.00> <CoreInst = "LogicGate">   --->   Core 74 'LogicGate' <Latency = 0> <II = 1> <Delay = 0.28> <FuncUnit> <Opcode : 'and' 'or' 'xor'> <InPorts = 2> <OutPorts = 1>
+ST_3 : Operation 82 [1/1] (0.00ns)   --->   "%shl_ln = bitconcatenate i9 @_ssdm_op_BitConcatenate.i9.i8.i1, i8 %p_0_0_0506_1698_load, i1 0" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1147]   --->   Operation 82 'bitconcatenate' 'shl_ln' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 83 [1/1] (0.00ns)   --->   "%zext_ln1147 = zext i8 %p_0_0_0506_1698_load_1" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1147]   --->   Operation 83 'zext' 'zext_ln1147' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 84 [1/1] (0.00ns)   --->   "%zext_ln1147_1 = zext i9 %shl_ln" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1147]   --->   Operation 84 'zext' 'zext_ln1147_1' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 85 [1/1] (0.00ns)   --->   "%zext_ln1147_2 = zext i8 %p_0_0_0506_1694_out_load" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1147]   --->   Operation 85 'zext' 'zext_ln1147_2' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 86 [1/1] (0.76ns)   --->   "%add_ln1147 = add i9 %zext_ln1147, i9 %zext_ln1147_2" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1147]   --->   Operation 86 'add' 'add_ln1147' <Predicate = true> <Delay = 0.76> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 0.76> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_3 : Operation 87 [1/1] (0.00ns)   --->   "%zext_ln1147_3 = zext i9 %add_ln1147" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1147]   --->   Operation 87 'zext' 'zext_ln1147_3' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 88 [1/1] (0.77ns)   --->   "%add_ln1147_1 = add i10 %zext_ln1147_3, i10 %zext_ln1147_1" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1147]   --->   Operation 88 'add' 'add_ln1147_1' <Predicate = true> <Delay = 0.77> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 0.77> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_3 : Operation 89 [1/1] (0.00ns)   --->   "%r_s = partselect i8 @_ssdm_op_PartSelect.i8.i10.i32.i32, i10 %add_ln1147_1, i32 2, i32 9" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1147]   --->   Operation 89 'partselect' 'r_s' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 90 [1/1] (0.00ns)   --->   "%shl_ln1 = bitconcatenate i9 @_ssdm_op_BitConcatenate.i9.i8.i1, i8 %p_0_0_0505_1701_load, i1 0" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1148]   --->   Operation 90 'bitconcatenate' 'shl_ln1' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 91 [1/1] (0.00ns)   --->   "%zext_ln1148 = zext i8 %p_0_0_0505_1701_load_1" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1148]   --->   Operation 91 'zext' 'zext_ln1148' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 92 [1/1] (0.00ns)   --->   "%zext_ln1148_1 = zext i9 %shl_ln1" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1148]   --->   Operation 92 'zext' 'zext_ln1148_1' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 93 [1/1] (0.00ns)   --->   "%zext_ln1148_2 = zext i8 %p_0_0_0505_1695_out_load" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1148]   --->   Operation 93 'zext' 'zext_ln1148_2' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 94 [1/1] (0.76ns)   --->   "%add_ln1148 = add i9 %zext_ln1148, i9 %zext_ln1148_2" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1148]   --->   Operation 94 'add' 'add_ln1148' <Predicate = true> <Delay = 0.76> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 0.76> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_3 : Operation 95 [1/1] (0.00ns)   --->   "%zext_ln1148_3 = zext i9 %add_ln1148" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1148]   --->   Operation 95 'zext' 'zext_ln1148_3' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 96 [1/1] (0.77ns)   --->   "%add_ln1148_1 = add i10 %zext_ln1148_3, i10 %zext_ln1148_1" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1148]   --->   Operation 96 'add' 'add_ln1148_1' <Predicate = true> <Delay = 0.77> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 0.77> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_3 : Operation 97 [1/1] (0.00ns)   --->   "%g_s = partselect i8 @_ssdm_op_PartSelect.i8.i10.i32.i32, i10 %add_ln1148_1, i32 2, i32 9" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1148]   --->   Operation 97 'partselect' 'g_s' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 98 [1/1] (0.00ns)   --->   "%shl_ln2 = bitconcatenate i9 @_ssdm_op_BitConcatenate.i9.i8.i1, i8 %p_0_0_0504_1704_load, i1 0" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1149]   --->   Operation 98 'bitconcatenate' 'shl_ln2' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 99 [1/1] (0.00ns)   --->   "%zext_ln1149 = zext i8 %p_0_0_0504_1704_load_1" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1149]   --->   Operation 99 'zext' 'zext_ln1149' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 100 [1/1] (0.00ns)   --->   "%zext_ln1149_1 = zext i9 %shl_ln2" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1149]   --->   Operation 100 'zext' 'zext_ln1149_1' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 101 [1/1] (0.00ns)   --->   "%zext_ln1149_2 = zext i8 %p_0_0_0504_1696_out_load" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1149]   --->   Operation 101 'zext' 'zext_ln1149_2' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 102 [1/1] (0.76ns)   --->   "%add_ln1149 = add i9 %zext_ln1149, i9 %zext_ln1149_2" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1149]   --->   Operation 102 'add' 'add_ln1149' <Predicate = true> <Delay = 0.76> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 0.76> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_3 : Operation 103 [1/1] (0.00ns)   --->   "%zext_ln1149_3 = zext i9 %add_ln1149" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1149]   --->   Operation 103 'zext' 'zext_ln1149_3' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 104 [1/1] (0.77ns)   --->   "%add_ln1149_1 = add i10 %zext_ln1149_3, i10 %zext_ln1149_1" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1149]   --->   Operation 104 'add' 'add_ln1149_1' <Predicate = true> <Delay = 0.77> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 0.77> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_3 : Operation 105 [1/1] (0.00ns)   --->   "%b_s = partselect i8 @_ssdm_op_PartSelect.i8.i10.i32.i32, i10 %add_ln1149_1, i32 2, i32 9" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1149]   --->   Operation 105 'partselect' 'b_s' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 106 [1/1] (0.28ns) (out node of the LUT)   --->   "%or_ln1144 = or i1 %and_ln1144, i1 %and_ln1144_1" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1144]   --->   Operation 106 'or' 'or_ln1144' <Predicate = true> <Delay = 0.28> <CoreInst = "LogicGate">   --->   Core 74 'LogicGate' <Latency = 0> <II = 1> <Delay = 0.28> <FuncUnit> <Opcode : 'and' 'or' 'xor'> <InPorts = 2> <OutPorts = 1>
+ST_3 : Operation 107 [1/1] (0.39ns)   --->   "%conv3_i_i708 = select i1 %or_ln1144, i8 %b_s, i8 %p_0_0_0504_1704_load" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1144]   --->   Operation 107 'select' 'conv3_i_i708' <Predicate = true> <Delay = 0.39> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.39> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_3 : Operation 108 [1/1] (0.39ns)   --->   "%conv3_i_i79707 = select i1 %or_ln1144, i8 %g_s, i8 %p_0_0_0505_1701_load" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1144]   --->   Operation 108 'select' 'conv3_i_i79707' <Predicate = true> <Delay = 0.39> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.39> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_3 : Operation 109 [1/1] (0.39ns)   --->   "%conv3_i_i188706 = select i1 %or_ln1144, i8 %r_s, i8 %p_0_0_0506_1698_load" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1144]   --->   Operation 109 'select' 'conv3_i_i188706' <Predicate = true> <Delay = 0.39> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.39> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_3 : Operation 110 [1/1] (0.42ns)   --->   "%store_ln1144 = store i5 %trunc_ln1, i5 %p_0_0_0507_1697" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1144]   --->   Operation 110 'store' 'store_ln1144' <Predicate = true> <Delay = 0.42>
+ST_3 : Operation 111 [1/1] (0.00ns)   --->   "%store_ln0 = store i8 %p_0_0_0504_1704_load, i8 %p_0_0_0504_1696_out"   --->   Operation 111 'store' 'store_ln0' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 112 [1/1] (0.00ns)   --->   "%store_ln0 = store i8 %p_0_0_0505_1701_load, i8 %p_0_0_0505_1695_out"   --->   Operation 112 'store' 'store_ln0' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 113 [1/1] (0.00ns)   --->   "%store_ln0 = store i8 %p_0_0_0506_1698_load, i8 %p_0_0_0506_1694_out"   --->   Operation 113 'store' 'store_ln0' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 114 [1/1] (0.00ns)   --->   "%store_ln1101 = store i8 %zext_ln1101, i8 %p_0_0_0507_1693_out" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1101]   --->   Operation 114 'store' 'store_ln1101' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 115 [1/1] (0.42ns)   --->   "%store_ln1144 = store i5 %trunc_ln1, i5 %phi_ln1132_out" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1144]   --->   Operation 115 'store' 'store_ln1144' <Predicate = true> <Delay = 0.42>
+ST_3 : Operation 116 [1/1] (0.00ns)   --->   "%br_ln1101 = br void %for.body25" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1101]   --->   Operation 116 'br' 'br_ln1101' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 120 [1/1] (0.00ns)   --->   "%store_ln0 = store i8 %p_0_0_0504_1704_load, i8 %p_0_0_0504_1704_out"   --->   Operation 120 'store' 'store_ln0' <Predicate = (icmp_ln1101)> <Delay = 0.00>
+ST_3 : Operation 121 [1/1] (0.00ns)   --->   "%store_ln0 = store i8 %p_0_0_0505_1701_load, i8 %p_0_0_0505_1701_out"   --->   Operation 121 'store' 'store_ln0' <Predicate = (icmp_ln1101)> <Delay = 0.00>
+ST_3 : Operation 122 [1/1] (0.00ns)   --->   "%store_ln0 = store i8 %p_0_0_0506_1698_load, i8 %p_0_0_0506_1698_out"   --->   Operation 122 'store' 'store_ln0' <Predicate = (icmp_ln1101)> <Delay = 0.00>
+ST_3 : Operation 123 [1/1] (0.42ns)   --->   "%ret_ln0 = ret"   --->   Operation 123 'ret' 'ret_ln0' <Predicate = (icmp_ln1101)> <Delay = 0.42>
+
+State 4 <SV = 3> <Delay = 1.83>
+ST_4 : Operation 117 [1/1] (0.00ns)   --->   "%or_ln1161_3 = bitconcatenate i24 @_ssdm_op_BitConcatenate.i24.i8.i8.i8, i8 %conv3_i_i188706, i8 %conv3_i_i708, i8 %conv3_i_i79707" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1161]   --->   Operation 117 'bitconcatenate' 'or_ln1161_3' <Predicate = (!icmp_ln1159)> <Delay = 0.00>
+ST_4 : Operation 118 [1/1] ( I:1.83ns O:1.83ns )   --->   "%write_ln1161 = write void @_ssdm_op_Write.ap_fifo.volatile.i24P0A, i24 %imgUnzip, i24 %or_ln1161_3" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1161]   --->   Operation 118 'write' 'write_ln1161' <Predicate = (!icmp_ln1159)> <Delay = 1.83> <CoreInst = "FIFO_SRL">   --->   Core 80 'FIFO_SRL' <Latency = 0> <II = 1> <Delay = 1.83> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = 24> <Depth = 2> <FIFO>
+ST_4 : Operation 119 [1/1] (0.00ns)   --->   "%br_ln1162 = br void %for.inc223" [C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1162]   --->   Operation 119 'br' 'br_ln1162' <Predicate = (!icmp_ln1159)> <Delay = 0.00>
+
+
+============================================================
++ Verbose Summary: Timing violations
+============================================================
+Target clock period: 6.734ns, clock uncertainty: 1.818ns.
+
+ <State 1>: 1.717ns
+The critical path consists of the following:
+	'store' operation ('store_ln1083', C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1083) of constant 0 17 bit on local variable 'x', C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1083 [35]  (0.427 ns)
+	'load' operation 17 bit ('x', C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1101) on local variable 'x', C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1083 [39]  (0.000 ns)
+	'icmp' operation 1 bit ('icmp_ln1101', C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1101) [43]  (0.863 ns)
+	'store' operation ('store_ln1083', C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1083) of variable 'x', C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1101 17 bit on local variable 'x', C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1083 [133]  (0.427 ns)
+
+ <State 2>: 2.265ns
+The critical path consists of the following:
+	fifo read operation ('imgRgb_read', C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1109) on port 'imgRgb' (C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1109) [55]  (1.838 ns)
+	'store' operation ('store_ln1109', C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1109) of variable 'trunc_ln1109_1', C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1109 8 bit on local variable 'p_0_0_0504_1704' [59]  (0.427 ns)
+
+ <State 3>: 3.301ns
+The critical path consists of the following:
+	'load' operation 8 bit ('p_0_0_0506_1698_load_1', C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1147) on local variable 'p_0_0_0506_1698' [69]  (0.000 ns)
+	'add' operation 7 bit ('add_ln1129', C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1129) [80]  (0.781 ns)
+	'add' operation 8 bit ('add_ln1129_1', C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1129) [82]  (0.000 ns)
+	'add' operation 8 bit ('lum', C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1129) [83]  (1.051 ns)
+	'icmp' operation 1 bit ('icmp_ln1144_1', C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1144) [86]  (0.789 ns)
+	'xor' operation 1 bit ('xor_ln1144', C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1144) [87]  (0.000 ns)
+	'and' operation 1 bit ('and_ln1144', C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1144) [88]  (0.000 ns)
+	'or' operation 1 bit ('or_ln1144', C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1144) [117]  (0.287 ns)
+	'select' operation 8 bit ('conv3_i_i708', C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1144) [118]  (0.393 ns)
+
+ <State 4>: 1.838ns
+The critical path consists of the following:
+	fifo write operation ('write_ln1161', C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1161) on port 'imgUnzip' (C:/pcam5/prj/sol/.autopilot/db/v_demosaic.cpp:1161) [125]  (1.838 ns)
+
+
+============================================================
++ Verbose Summary: Binding
+============================================================
+N/A
+* FSMD analyzer results:
+  - Output states:
+ - Input state : 
+  - Chain level:
+	State 1
+	State 2
+	State 3
+	State 4
+
+
+============================================================
++ Verbose Summary: Datapath Resource usage 
+============================================================
+N/A

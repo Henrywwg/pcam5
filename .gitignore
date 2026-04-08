@@ -1,0 +1,6 @@
+*.runs/
+*.gen/
+*.ip_user_files/
+*.hw/
+*.sim/
+*.cache/
