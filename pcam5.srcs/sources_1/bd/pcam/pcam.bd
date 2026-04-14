@@ -1694,7 +1694,12 @@
         "xci_name": "pcam_AXI4_Stream_Sobel_wr_0_1",
         "xci_path": "ip\\pcam_AXI4_Stream_Sobel_wr_0_1\\pcam_AXI4_Stream_Sobel_wr_0_1.xci",
         "inst_hier_path": "AXI4_Stream_Sobel_wr_0",
-        "has_run_ip_tcl": "true"
+        "has_run_ip_tcl": "true",
+        "parameters": {
+          "IMG_WIDTH": {
+            "value": "860"
+          }
+        }
       },
       "axis_register_gs": {
         "vlnv": "xilinx.com:ip:axis_register_slice:1.1",

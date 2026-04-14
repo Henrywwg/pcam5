@@ -10,7 +10,7 @@
    "Color Coded_TopLeft":"-144,-316",
    "Default View_Layers":"/axi_vdma_0_s2mm_introut:true|",
    "Default View_ScaleFactor":"1.06197",
-   "Default View_TopLeft":"105,23",
+   "Default View_TopLeft":"-382,228",
    "Display-IntfAXI4Lite":"true",
    "Display-IntfAXIStream":"true",
    "Display-IntfOthers":"true",
@@ -130,11 +130,11 @@ preplace inst AXI4_Stream_Crop_wra_0 -pg 1 -lvl 3 -x 840 -y 1040 -swap {0 1 2 3 
 preplace inst axis_register_slice_0 -pg 1 -lvl 3 -x 840 -y 890 -defaultsOSRD -resize 121 98
 preplace inst grayscale_0 -pg 1 -lvl 4 -x 1150 -y 1050 -defaultsOSRD
 preplace inst axis_register_slice_1 -pg 1 -lvl 3 -x 840 -y 1190 -defaultsOSRD -resize 113 98
-preplace inst AXI4_Stream_Sobel_wr_0 -pg 1 -lvl 5 -x 1450 -y 920 -swap {0 1 2 3 4 5 6 7 8 9 10 11 13 12} -defaultsOSRD
+preplace inst AXI4_Stream_Sobel_wr_0 -pg 1 -lvl 5 -x 1450 -y 930 -swap {0 1 2 3 4 5 6 7 8 9 10 11 13 12} -defaultsOSRD
 preplace inst axis_register_gs -pg 1 -lvl 4 -x 1150 -y 910 -swap {0 1 2 3 4 5 6 7 8 9 10 11 13 12} -defaultsOSRD -resize 132 98
 preplace inst AXI4_Stream_stitch -pg 1 -lvl 6 -x 1700 -y 930 -defaultsOSRD
-preplace inst axis_register_stitch -pg 1 -lvl 6 -x 1700 -y 1060 -defaultsOSRD -resize 123 98
-preplace inst axis_register_sobel -pg 1 -lvl 5 -x 1450 -y 1070 -defaultsOSRD -resize 137 100
+preplace inst axis_register_stitch -pg 1 -lvl 6 -x 1700 -y 1090 -defaultsOSRD -resize 123 98
+preplace inst axis_register_sobel -pg 1 -lvl 5 -x 1450 -y 1080 -defaultsOSRD -resize 137 100
 preplace inst top_broadcast -pg 1 -lvl 3 -x 840 -y 690 -defaultsOSRD
 preplace inst downscaler_param_0 -pg 1 -lvl 6 -x 1700 -y 770 -defaultsOSRD
 preplace inst axis_register_ds_0 -pg 1 -lvl 4 -x 1150 -y 580 -defaultsOSRD -resize 116 98
@@ -145,30 +145,30 @@ preplace inst axis_register_ds_2 -pg 1 -lvl 5 -x 1450 -y 760 -defaultsOSRD -resi
 preplace inst smartconnect_0 -pg 1 -lvl 8 -x 2380 -y 640 -defaultsOSRD
 preplace inst smartconnect_1 -pg 1 -lvl 8 -x 2380 -y 1020 -defaultsOSRD
 preplace netloc axi_gpio_0_gpio_io_o 1 8 1 N 220
-preplace netloc clk_wiz_0_clk_VID 1 1 7 -10 730 670 770 1040 660 1330 660 1580 650 1840 520 2230
+preplace netloc clk_wiz_0_clk_VID 1 1 7 -10 730 660 770 1040 660 1330 660 1570 650 1830 520 2230
 preplace netloc clk_wiz_0_clk_out2 1 1 1 NJ 370
 preplace netloc clk_wiz_0_locked 1 1 1 -40 120n
-preplace netloc proc_sys_reset_0_peripheral_aresetn 1 1 7 20 750 640 590 1020 650 1340 640 1590 680 1830 760 2240
-preplace netloc zynq_ultra_ps_e_0_pl_clk0 1 0 3 -220 1000 NJ 1000 570J
+preplace netloc proc_sys_reset_0_peripheral_aresetn 1 1 7 20 750 630 590 1020 650 1340 640 1580 680 1810 760 2240
+preplace netloc zynq_ultra_ps_e_0_pl_clk0 1 0 3 -220 990 NJ 990 570J
 preplace netloc zynq_ultra_ps_e_0_pl_resetn0 1 0 3 -220 230 -20 230 580J
-preplace netloc AXI4_Stream_Crop_wra_0_m_axis 1 2 2 680 960 990
-preplace netloc AXI4_Stream_Frame_St_0_m_axis 1 5 2 1600 1130 1800
-preplace netloc AXI4_Stream_Sobel_wr_0_m_axis 1 4 2 1350 1000 1550
+preplace netloc AXI4_Stream_Crop_wra_0_m_axis 1 2 2 690 960 990
+preplace netloc AXI4_Stream_Frame_St_0_m_axis 1 5 2 1600 1020 1800
+preplace netloc AXI4_Stream_Sobel_wr_0_m_axis 1 4 2 1350 1010 1550
 preplace netloc axi_iic_0_IIC 1 8 1 N 380
 preplace netloc axi_smc_M00_AXI 1 2 6 600 370 N 370 N 370 N 370 N 370 2250
-preplace netloc axi_smc_M01_AXI 1 2 5 650 820 1030 830 N 830 1550 850 1810
+preplace netloc axi_smc_M01_AXI 1 2 5 650 810 1030 830 N 830 1560 1010 1820
 preplace netloc axi_smc_M02_AXI 1 1 2 0 740 560
 preplace netloc axi_smc_M03_AXI 1 1 2 30 720 570J
 preplace netloc axi_smc_M04_AXI 1 2 6 610 190 N 190 N 190 N 190 N 190 N
-preplace netloc axi_smc_M05_AXI 1 2 5 660 550 1020 510 1260 630 N 630 1800
+preplace netloc axi_smc_M05_AXI 1 2 5 640 550 1020 510 1260 630 N 630 1800
 preplace netloc axis_register_ds_0_M_AXIS 1 4 1 1250 530n
-preplace netloc axis_register_ds_1_M_AXIS 1 6 1 1820 560n
+preplace netloc axis_register_ds_1_M_AXIS 1 6 1 1810 560n
 preplace netloc axis_register_ds_2_M_AXIS 1 5 1 1550 750n
-preplace netloc axis_register_slice_0_M_AXIS 1 2 2 690 810 990
+preplace netloc axis_register_slice_0_M_AXIS 1 2 2 680 820 990
 preplace netloc axis_register_slice_1_M_AXIS 1 3 1 1030 1030n
-preplace netloc axis_register_slice_2_M_AXIS 1 4 1 1350J 900n
-preplace netloc axis_register_slice_3_M_AXIS 1 6 1 1810 980n
-preplace netloc axis_register_sobel_M_AXIS 1 5 1 1560 910n
+preplace netloc axis_register_slice_2_M_AXIS 1 4 1 NJ 910
+preplace netloc axis_register_slice_3_M_AXIS 1 6 1 1840 980n
+preplace netloc axis_register_sobel_M_AXIS 1 5 1 1590 910n
 preplace netloc axis_subset_converter_0_M_AXIS 1 2 2 690 390 1020
 preplace netloc downscaler_param_0_m_axis 1 5 2 1600 640 1800
 preplace netloc grayscale_1_m_axis 1 4 2 1350 650 1550
@@ -176,13 +176,13 @@ preplace netloc grayscale_wrapper_0_m_axis 1 3 2 1050 840 1250J
 preplace netloc mipi_csi2_rx_subsyst_0_video_out 1 1 2 40 650 560
 preplace netloc mipi_phy_if_0_1 1 0 2 NJ 290 NJ
 preplace netloc smartconnect_0_M00_AXI 1 1 8 10 470 590 380 N 380 N 380 N 380 N 380 2200 480 2510
-preplace netloc smartconnect_1_M00_AXI 1 1 8 40 1290 N 1290 N 1290 N 1290 N 1290 N 1290 N 1290 2510
+preplace netloc smartconnect_1_M00_AXI 1 1 8 40 1010 670 800 N 800 1260 850 N 850 N 850 N 850 2510
 preplace netloc top_broadcast_M00_AXIS 1 3 1 1030 570n
-preplace netloc top_broadcast_M01_AXIS 1 2 2 680 780 990
 preplace netloc vdemo_m_axis_video 1 2 1 620 450n
 preplace netloc vdma_color_M_AXI_S2MM 1 7 1 N 1000
 preplace netloc vdma_downscale_M_AXI_S2MM 1 7 1 N 620
-preplace netloc zynq_ultra_ps_e_0_M_AXI_HPM0_FPD 1 1 2 40 1010 560
+preplace netloc zynq_ultra_ps_e_0_M_AXI_HPM0_FPD 1 1 2 40 1000 560
+preplace netloc top_broadcast_M01_AXIS 1 2 2 690 780 990
 levelinfo -pg 1 -250 -130 300 840 1150 1450 1700 2020 2380 3800
 pagesize -pg 1 -db -bbox -sgen -400 -310 3960 1890
 "

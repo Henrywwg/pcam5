@@ -9,7 +9,7 @@
     "parameters": {
       "component_parameters": {
         "COLOR_BITS": [ { "value": "8", "resolve_type": "user", "format": "long", "usage": "all" } ],
-        "IMG_WIDTH": [ { "value": "1920", "resolve_type": "user", "format": "long", "usage": "all" } ],
+        "IMG_WIDTH": [ { "value": "860", "value_src": "user", "resolve_type": "user", "format": "long", "usage": "all" } ],
         "IMG_HEIGHT": [ { "value": "1080", "resolve_type": "user", "format": "long", "usage": "all" } ],
         "Component_Name": [ { "value": "pcam_AXI4_Stream_Sobel_wr_0_1", "resolve_type": "user", "usage": "all" } ]
       },
@@ -145,5 +145,5 @@
       }
     }
   },
-  "checksum": "a62d63d1"
+  "checksum": "37cfe87b"
 }
