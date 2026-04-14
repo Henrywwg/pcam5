@@ -1,14 +1,14 @@
 {
   "schema": "xilinx.com:schema:json_instance:1.0",
   "ip_inst": {
-    "xci_name": "pcam_axi_smc_1_0",
-    "cell_name": "axi_smc_1",
+    "xci_name": "pcam_smartconnect_0_0",
+    "cell_name": "smartconnect_0",
     "component_reference": "xilinx.com:ip:smartconnect:1.0",
     "ip_revision": "28",
-    "gen_directory": "../../../../../../pcam5.gen/sources_1/bd/pcam/ip/pcam_axi_smc_1_0",
+    "gen_directory": "../../../../../../pcam5.gen/sources_1/bd/pcam/ip/pcam_smartconnect_0_0",
     "parameters": {
       "component_parameters": {
-        "Component_Name": [ { "value": "pcam_axi_smc_1_0", "resolve_type": "user", "usage": "all" } ],
+        "Component_Name": [ { "value": "pcam_smartconnect_0_0", "resolve_type": "user", "usage": "all" } ],
         "NUM_MI": [ { "value": "1", "resolve_type": "user", "format": "long", "usage": "all" } ],
         "NUM_SI": [ { "value": "1", "value_src": "user", "resolve_type": "user", "format": "long", "usage": "all" } ],
         "NUM_CLKS": [ { "value": "1", "resolve_type": "user", "format": "long", "usage": "all" } ],
@@ -17,7 +17,7 @@
         "ADVANCED_PROPERTIES": [ { "value": "0", "resolve_type": "user", "usage": "all" } ]
       },
       "model_parameters": {
-        "TLM_COMPONENT_NAME": [ { "value": "pcam_axi_smc_1_0", "resolve_type": "generated", "usage": "simulation.tlm" } ],
+        "TLM_COMPONENT_NAME": [ { "value": "pcam_smartconnect_0_0", "resolve_type": "generated", "usage": "simulation.tlm" } ],
         "HAS_RESET": [ { "value": "1", "resolve_type": "generated", "format": "long", "usage": "simulation.tlm" } ]
       },
       "project_parameters": {
@@ -37,7 +37,7 @@
         "IPCONTEXT": [ { "value": "IP_Integrator" } ],
         "IPREVISION": [ { "value": "28" } ],
         "MANAGED": [ { "value": "TRUE" } ],
-        "OUTPUTDIR": [ { "value": "../../../../../../pcam5.gen/sources_1/bd/pcam/ip/pcam_axi_smc_1_0" } ],
+        "OUTPUTDIR": [ { "value": "../../../../../../pcam5.gen/sources_1/bd/pcam/ip/pcam_smartconnect_0_0" } ],
         "SELECTEDSIMMODEL": [ { "value": "" } ],
         "SHAREDDIR": [ { "value": "../../ipshared" } ],
         "SWVERSION": [ { "value": "2025.2" } ],
@@ -236,5 +236,5 @@
       }
     }
   },
-  "checksum": "a91a419d"
+  "checksum": "f68295e7"
 }

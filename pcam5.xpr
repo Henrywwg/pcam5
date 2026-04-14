@@ -67,13 +67,13 @@
     <Option Name="WTVcsLaunchSim" Val="0"/>
     <Option Name="WTRivieraLaunchSim" Val="0"/>
     <Option Name="WTActivehdlLaunchSim" Val="0"/>
-    <Option Name="WTXSimExportSim" Val="3"/>
-    <Option Name="WTModelSimExportSim" Val="3"/>
-    <Option Name="WTQuestaExportSim" Val="3"/>
+    <Option Name="WTXSimExportSim" Val="10"/>
+    <Option Name="WTModelSimExportSim" Val="10"/>
+    <Option Name="WTQuestaExportSim" Val="10"/>
     <Option Name="WTIesExportSim" Val="0"/>
     <Option Name="WTVcsExportSim" Val="0"/>
-    <Option Name="WTRivieraExportSim" Val="3"/>
-    <Option Name="WTActivehdlExportSim" Val="3"/>
+    <Option Name="WTRivieraExportSim" Val="10"/>
+    <Option Name="WTActivehdlExportSim" Val="10"/>
     <Option Name="GenerateIPUpgradeLog" Val="TRUE"/>
     <Option Name="XSimRadix" Val="hex"/>
     <Option Name="XSimTimeUnit" Val="ns"/>
@@ -97,14 +97,17 @@
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
-        <CompFileExtendedInfo CompFileName="pcam.bd" FileRelPathName="ip\pcam_axi_gpio_0_0\pcam_axi_gpio_0_0.xci">
-          <Proxy FileSetName="pcam_axi_gpio_0_0"/>
+        <CompFileExtendedInfo CompFileName="pcam.bd" FileRelPathName="ip\pcam_AXI4_Stream_Crop_wra_0_0\pcam_AXI4_Stream_Crop_wra_0_0.xci">
+          <Proxy FileSetName="pcam_AXI4_Stream_Crop_wra_0_0"/>
         </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="pcam.bd" FileRelPathName="ip\pcam_axi_smc_0\pcam_axi_smc_0.xci">
-          <Proxy FileSetName="pcam_axi_smc_0"/>
+        <CompFileExtendedInfo CompFileName="pcam.bd" FileRelPathName="ip\pcam_AXI4_Stream_Frame_St_0_1\pcam_AXI4_Stream_Frame_St_0_1.xci">
+          <Proxy FileSetName="pcam_AXI4_Stream_Frame_St_0_1"/>
         </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="pcam.bd" FileRelPathName="ip\pcam_axi_smc_1_0\pcam_axi_smc_1_0.xci">
-          <Proxy FileSetName="pcam_axi_smc_1_0"/>
+        <CompFileExtendedInfo CompFileName="pcam.bd" FileRelPathName="ip\pcam_axis_broadcaster_0_2\pcam_axis_broadcaster_0_2.xci">
+          <Proxy FileSetName="pcam_axis_broadcaster_0_2"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="pcam.bd" FileRelPathName="ip\pcam_zynq_ultra_ps_e_0_0\pcam_zynq_ultra_ps_e_0_0.xci">
+          <Proxy FileSetName="pcam_zynq_ultra_ps_e_0_0"/>
         </CompFileExtendedInfo>
       </File>
       <File Path="$PGENDIR/sources_1/bd/pcam/hdl/pcam_wrapper.v">
@@ -176,21 +179,27 @@
         <Option Name="TopAutoSet" Val="TRUE"/>
       </Config>
     </FileSet>
-    <FileSet Name="pcam_axi_smc_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/pcam_axi_smc_0" RelGenDir="$PGENDIR/pcam_axi_smc_0">
+    <FileSet Name="pcam_axis_broadcaster_0_2" Type="BlockSrcs" RelSrcDir="$PSRCDIR/pcam_axis_broadcaster_0_2" RelGenDir="$PGENDIR/pcam_axis_broadcaster_0_2">
       <Config>
-        <Option Name="TopModule" Val="pcam_axi_smc_0"/>
+        <Option Name="TopModule" Val="pcam_axis_broadcaster_0_2"/>
         <Option Name="UseBlackboxStub" Val="1"/>
       </Config>
     </FileSet>
-    <FileSet Name="pcam_axi_smc_1_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/pcam_axi_smc_1_0" RelGenDir="$PGENDIR/pcam_axi_smc_1_0">
+    <FileSet Name="pcam_zynq_ultra_ps_e_0_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/pcam_zynq_ultra_ps_e_0_0" RelGenDir="$PGENDIR/pcam_zynq_ultra_ps_e_0_0">
       <Config>
-        <Option Name="TopModule" Val="pcam_axi_smc_1_0"/>
+        <Option Name="TopModule" Val="pcam_zynq_ultra_ps_e_0_0"/>
         <Option Name="UseBlackboxStub" Val="1"/>
       </Config>
     </FileSet>
-    <FileSet Name="pcam_axi_gpio_0_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/pcam_axi_gpio_0_0" RelGenDir="$PGENDIR/pcam_axi_gpio_0_0">
+    <FileSet Name="pcam_AXI4_Stream_Frame_St_0_1" Type="BlockSrcs" RelSrcDir="$PSRCDIR/pcam_AXI4_Stream_Frame_St_0_1" RelGenDir="$PGENDIR/pcam_AXI4_Stream_Frame_St_0_1">
       <Config>
-        <Option Name="TopModule" Val="pcam_axi_gpio_0_0"/>
+        <Option Name="TopModule" Val="pcam_AXI4_Stream_Frame_St_0_1"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="pcam_AXI4_Stream_Crop_wra_0_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/pcam_AXI4_Stream_Crop_wra_0_0" RelGenDir="$PGENDIR/pcam_AXI4_Stream_Crop_wra_0_0">
+      <Config>
+        <Option Name="TopModule" Val="pcam_AXI4_Stream_Crop_wra_0_0"/>
         <Option Name="UseBlackboxStub" Val="1"/>
       </Config>
     </FileSet>
@@ -224,7 +233,27 @@
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
       <RQSFiles/>
     </Run>
-    <Run Id="pcam_axi_smc_0_synth_1" Type="Ft3:Synth" SrcSet="pcam_axi_smc_0" Part="xczu3eg-sfvc784-2-e" ConstrsSet="pcam_axi_smc_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/pcam_axi_smc_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/pcam_axi_smc_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/pcam_axi_smc_0_synth_1" ParallelReportGen="true">
+    <Run Id="pcam_axis_broadcaster_0_2_synth_1" Type="Ft3:Synth" SrcSet="pcam_axis_broadcaster_0_2" Part="xczu3eg-sfvc784-2-e" ConstrsSet="pcam_axis_broadcaster_0_2" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/pcam_axis_broadcaster_0_2_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/pcam_axis_broadcaster_0_2_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/pcam_axis_broadcaster_0_2_synth_1" ParallelReportGen="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2025"/>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2025"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="pcam_zynq_ultra_ps_e_0_0_synth_1" Type="Ft3:Synth" SrcSet="pcam_zynq_ultra_ps_e_0_0" Part="xczu3eg-sfvc784-2-e" ConstrsSet="pcam_zynq_ultra_ps_e_0_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/pcam_zynq_ultra_ps_e_0_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/pcam_zynq_ultra_ps_e_0_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/pcam_zynq_ultra_ps_e_0_0_synth_1" ParallelReportGen="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2025"/>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2025"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="pcam_AXI4_Stream_Frame_St_0_1_synth_1" Type="Ft3:Synth" SrcSet="pcam_AXI4_Stream_Frame_St_0_1" Part="xczu3eg-sfvc784-2-e" ConstrsSet="pcam_AXI4_Stream_Frame_St_0_1" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/pcam_AXI4_Stream_Frame_St_0_1_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/pcam_AXI4_Stream_Frame_St_0_1_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/pcam_AXI4_Stream_Frame_St_0_1_synth_1" ParallelReportGen="true">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2025">
           <Desc>Vivado Synthesis Defaults</Desc>
@@ -236,19 +265,7 @@
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
       <RQSFiles/>
     </Run>
-    <Run Id="pcam_axi_smc_1_0_synth_1" Type="Ft3:Synth" SrcSet="pcam_axi_smc_1_0" Part="xczu3eg-sfvc784-2-e" ConstrsSet="pcam_axi_smc_1_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/pcam_axi_smc_1_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/pcam_axi_smc_1_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/pcam_axi_smc_1_0_synth_1" ParallelReportGen="true">
-      <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2025">
-          <Desc>Vivado Synthesis Defaults</Desc>
-        </StratHandle>
-        <Step Id="synth_design"/>
-      </Strategy>
-      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
-      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2025"/>
-      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
-      <RQSFiles/>
-    </Run>
-    <Run Id="pcam_axi_gpio_0_0_synth_1" Type="Ft3:Synth" SrcSet="pcam_axi_gpio_0_0" Part="xczu3eg-sfvc784-2-e" ConstrsSet="pcam_axi_gpio_0_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/pcam_axi_gpio_0_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/pcam_axi_gpio_0_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/pcam_axi_gpio_0_0_synth_1" ParallelReportGen="true">
+    <Run Id="pcam_AXI4_Stream_Crop_wra_0_0_synth_1" Type="Ft3:Synth" SrcSet="pcam_AXI4_Stream_Crop_wra_0_0" Part="xczu3eg-sfvc784-2-e" ConstrsSet="pcam_AXI4_Stream_Crop_wra_0_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/pcam_AXI4_Stream_Crop_wra_0_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/pcam_AXI4_Stream_Crop_wra_0_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/pcam_AXI4_Stream_Crop_wra_0_0_synth_1" ParallelReportGen="true">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2025">
           <Desc>Vivado Synthesis Defaults</Desc>
@@ -278,7 +295,41 @@
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
       <RQSFiles/>
     </Run>
-    <Run Id="pcam_axi_smc_0_impl_1" Type="Ft2:EntireDesign" Part="xczu3eg-sfvc784-2-e" ConstrsSet="pcam_axi_smc_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="pcam_axi_smc_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/pcam_axi_smc_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/pcam_axi_smc_0_impl_1" ParallelReportGen="true">
+    <Run Id="pcam_axis_broadcaster_0_2_impl_1" Type="Ft2:EntireDesign" Part="xczu3eg-sfvc784-2-e" ConstrsSet="pcam_axis_broadcaster_0_2" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="pcam_axis_broadcaster_0_2_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/pcam_axis_broadcaster_0_2_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/pcam_axis_broadcaster_0_2_impl_1" ParallelReportGen="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2025"/>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2025"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="pcam_zynq_ultra_ps_e_0_0_impl_1" Type="Ft2:EntireDesign" Part="xczu3eg-sfvc784-2-e" ConstrsSet="pcam_zynq_ultra_ps_e_0_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="pcam_zynq_ultra_ps_e_0_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/pcam_zynq_ultra_ps_e_0_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/pcam_zynq_ultra_ps_e_0_0_impl_1" ParallelReportGen="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2025"/>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2025"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="pcam_AXI4_Stream_Frame_St_0_1_impl_1" Type="Ft2:EntireDesign" Part="xczu3eg-sfvc784-2-e" ConstrsSet="pcam_AXI4_Stream_Frame_St_0_1" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="pcam_AXI4_Stream_Frame_St_0_1_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/pcam_AXI4_Stream_Frame_St_0_1_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/pcam_AXI4_Stream_Frame_St_0_1_impl_1" ParallelReportGen="true">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2025">
           <Desc>Default settings for Implementation.</Desc>
@@ -297,26 +348,7 @@
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
       <RQSFiles/>
     </Run>
-    <Run Id="pcam_axi_smc_1_0_impl_1" Type="Ft2:EntireDesign" Part="xczu3eg-sfvc784-2-e" ConstrsSet="pcam_axi_smc_1_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="pcam_axi_smc_1_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/pcam_axi_smc_1_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/pcam_axi_smc_1_0_impl_1" ParallelReportGen="true">
-      <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2025">
-          <Desc>Default settings for Implementation.</Desc>
-        </StratHandle>
-        <Step Id="init_design"/>
-        <Step Id="opt_design"/>
-        <Step Id="power_opt_design"/>
-        <Step Id="place_design"/>
-        <Step Id="post_place_power_opt_design"/>
-        <Step Id="phys_opt_design"/>
-        <Step Id="route_design"/>
-        <Step Id="post_route_phys_opt_design"/>
-        <Step Id="write_bitstream"/>
-      </Strategy>
-      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2025"/>
-      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
-      <RQSFiles/>
-    </Run>
-    <Run Id="pcam_axi_gpio_0_0_impl_1" Type="Ft2:EntireDesign" Part="xczu3eg-sfvc784-2-e" ConstrsSet="pcam_axi_gpio_0_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="pcam_axi_gpio_0_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/pcam_axi_gpio_0_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/pcam_axi_gpio_0_0_impl_1" ParallelReportGen="true">
+    <Run Id="pcam_AXI4_Stream_Crop_wra_0_0_impl_1" Type="Ft2:EntireDesign" Part="xczu3eg-sfvc784-2-e" ConstrsSet="pcam_AXI4_Stream_Crop_wra_0_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="pcam_AXI4_Stream_Crop_wra_0_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/pcam_AXI4_Stream_Crop_wra_0_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/pcam_AXI4_Stream_Crop_wra_0_0_impl_1" ParallelReportGen="true">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2025">
           <Desc>Default settings for Implementation.</Desc>
