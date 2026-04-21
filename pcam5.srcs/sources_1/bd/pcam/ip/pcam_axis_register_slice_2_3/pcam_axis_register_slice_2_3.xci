@@ -1,11 +1,11 @@
 {
   "schema": "xilinx.com:schema:json_instance:1.0",
   "ip_inst": {
-    "xci_name": "pcam_axis_register_slice_4_0",
-    "cell_name": "axis_register_sobel",
+    "xci_name": "pcam_axis_register_slice_2_3",
+    "cell_name": "axis_register_slice_2",
     "component_reference": "xilinx.com:ip:axis_register_slice:1.1",
     "ip_revision": "35",
-    "gen_directory": "../../../../../../pcam5.gen/sources_1/bd/pcam/ip/pcam_axis_register_slice_4_0",
+    "gen_directory": "../../../../../../pcam5.gen/sources_1/bd/pcam/ip/pcam_axis_register_slice_2_3",
     "parameters": {
       "component_parameters": {
         "TDATA_NUM_BYTES": [ { "value": "3", "value_src": "propagated", "value_permission": "bd_and_user", "resolve_type": "user", "format": "long", "usage": "all" } ],
@@ -22,7 +22,7 @@
         "PIPELINES_MASTER": [ { "value": "0", "resolve_type": "user", "format": "long", "enabled": false, "usage": "all" } ],
         "PIPELINES_MIDDLE": [ { "value": "0", "resolve_type": "user", "format": "long", "enabled": false, "usage": "all" } ],
         "PIPELINES_SLAVE": [ { "value": "0", "resolve_type": "user", "format": "long", "enabled": false, "usage": "all" } ],
-        "Component_Name": [ { "value": "pcam_axis_register_slice_4_0", "resolve_type": "user", "usage": "all" } ]
+        "Component_Name": [ { "value": "pcam_axis_register_slice_2_3", "resolve_type": "user", "usage": "all" } ]
       },
       "model_parameters": {
         "C_FAMILY": [ { "value": "zynquplus", "resolve_type": "generated", "usage": "all" } ],
@@ -54,7 +54,7 @@
         "IPCONTEXT": [ { "value": "IP_Integrator" } ],
         "IPREVISION": [ { "value": "35" } ],
         "MANAGED": [ { "value": "TRUE" } ],
-        "OUTPUTDIR": [ { "value": "../../../../../../pcam5.gen/sources_1/bd/pcam/ip/pcam_axis_register_slice_4_0" } ],
+        "OUTPUTDIR": [ { "value": "../../../../../../pcam5.gen/sources_1/bd/pcam/ip/pcam_axis_register_slice_2_3" } ],
         "SELECTEDSIMMODEL": [ { "value": "" } ],
         "SHAREDDIR": [ { "value": "../../ipshared" } ],
         "SWVERSION": [ { "value": "2025.2" } ],
@@ -84,7 +84,7 @@
           "parameters": {
             "POLARITY": [ { "value": "ACTIVE_LOW", "value_src": "constant", "value_permission": "bd", "resolve_type": "generated", "is_ips_inferred": true, "is_static_object": false } ],
             "INSERT_VIP": [ { "value": "0", "resolve_type": "user", "format": "long", "usage": "simulation.rtl", "is_ips_inferred": true, "is_static_object": false } ],
-            "TYPE": [ { "value": "INTERCONNECT", "value_permission": "bd", "resolve_type": "generated", "is_ips_inferred": true, "is_static_object": false } ]
+            "TYPE": [ { "value": "INTERCONNECT", "resolve_type": "generated", "is_ips_inferred": true, "is_static_object": false } ]
           },
           "port_maps": {
             "RST": [ { "physical_name": "aresetn" } ]
@@ -166,5 +166,5 @@
       }
     }
   },
-  "checksum": "bde96a68"
+  "checksum": "85f447c9"
 }

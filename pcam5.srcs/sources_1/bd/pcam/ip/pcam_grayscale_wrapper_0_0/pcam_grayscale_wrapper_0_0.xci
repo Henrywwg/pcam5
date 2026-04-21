@@ -1,14 +1,14 @@
 {
   "schema": "xilinx.com:schema:json_instance:1.0",
   "ip_inst": {
-    "xci_name": "pcam_grayscale_wrapper_0_1",
-    "cell_name": "grayscale_0",
+    "xci_name": "pcam_grayscale_wrapper_0_0",
+    "cell_name": "grayscale_wrapper_0",
     "component_reference": "xilinx.com:user:grayscale_wrapper:1.0",
     "ip_revision": "3",
-    "gen_directory": "../../../../../../pcam5.gen/sources_1/bd/pcam/ip/pcam_grayscale_wrapper_0_1",
+    "gen_directory": "../../../../../../pcam5.gen/sources_1/bd/pcam/ip/pcam_grayscale_wrapper_0_0",
     "parameters": {
       "component_parameters": {
-        "Component_Name": [ { "value": "pcam_grayscale_wrapper_0_1", "resolve_type": "user", "usage": "all" } ]
+        "Component_Name": [ { "value": "pcam_grayscale_wrapper_0_0", "resolve_type": "user", "usage": "all" } ]
       },
       "project_parameters": {
         "ARCHITECTURE": [ { "value": "zynquplus", "resolve_type": "generated", "usage": "all" } ],
@@ -27,7 +27,7 @@
         "IPCONTEXT": [ { "value": "IP_Integrator" } ],
         "IPREVISION": [ { "value": "3" } ],
         "MANAGED": [ { "value": "TRUE" } ],
-        "OUTPUTDIR": [ { "value": "../../../../../../pcam5.gen/sources_1/bd/pcam/ip/pcam_grayscale_wrapper_0_1" } ],
+        "OUTPUTDIR": [ { "value": "../../../../../../pcam5.gen/sources_1/bd/pcam/ip/pcam_grayscale_wrapper_0_0" } ],
         "SELECTEDSIMMODEL": [ { "value": "" } ],
         "SHAREDDIR": [ { "value": "../../ipshared" } ],
         "SWVERSION": [ { "value": "2025.2" } ],
@@ -137,5 +137,5 @@
       }
     }
   },
-  "checksum": "b314cc8b"
+  "checksum": "89c31e1e"
 }

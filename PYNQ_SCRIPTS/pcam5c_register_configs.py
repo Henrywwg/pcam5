@@ -1,12 +1,80 @@
+
+#####################################################
+#                                                   #
+#  Helper functions and includes. RUN THIS FIRST!!  #
+#                                                   #
+#####################################################
+
+
+from pynq import Overlay, allocate, MMIO
+import numpy as np
+import matplotlib.pyplot as plt
+import time
+from pynq.lib import AxiIIC
+
+def write_cam_reg(reg, val):
+    reg_msb = (reg >> 8) & 0xFF
+    reg_lsb = reg & 0xFF
+    
+    # Send as a 3-byte payload: [Address High, Address Low, Data]
+    iic.send(CAM_I2C_ADDR, [reg_msb, reg_lsb, val], length=3)
+
+def read_cam_reg(reg):
+    reg_msb = (reg >> 8) & 0xFF
+    reg_lsb = reg & 0xFF
+    
+    iic.send(CAM_I2C_ADDR, [reg_msb, reg_lsb], length=2)
+
+    val = iic.receive(CAM_I2C_ADDR, length=1)
+    return val[0]
+
+
+def _RUN_PIPELINE_DIAGNOSTICS():
+    print("\n--- PIPELINE DIAGNOSTICS ---")
+
+    # 1. MIPI IP Diagnostics
+    mipi = MMIO(ol.ip_dict['mipi_csi2_rx_subsyst_0']['phys_addr'], 0x1000)
+    mipi_status = mipi.read(0x10)
+    mipi_intr = mipi.read(0x24)
+    mipi_pkts = mipi.read(0x60)
+    mipi_err1 = mipi.read(0x08)
+    mipi_err2 = mipi.read(0x0c)
+
+    print("MIPI CSI-2 Rx:")
+    print(f"  Core Status (0x10):   {hex(mipi_status)}")
+    print(f"  Interrupts (0x24):    {hex(mipi_intr)}")
+    print(f"  Packet Count (0x60):  {mipi_pkts} (If 0, camera is asleep/broken)")
+
+    # 2. Demosaic IP Diagnostics
+    demo_ctrl = demosaic.read(0x00)
+    print("\nDemosaic IP:")
+    print(f"  Control Reg (0x00):   {hex(demo_ctrl)}")
+    if demo_ctrl == 0x81:
+        print("  -> ERROR: Stuck waiting for Start of Frame! (Resolution mismatch?)")
+    elif demo_ctrl & 0x02:
+        print("  -> SUCCESS: AP_DONE flag is set, Demosaic processed a frame.")
+
+    # 3. VDMA Diagnostics
+    vdma_status = vdma.read(0x34)
+    print("\nVDMA Write (S2MM):")
+    print(f"  Status Reg (0x34):    {hex(vdma_status)}")
+    if vdma_status & 0x1000:
+        print("  -> ERROR: End of Line Early (HSIZE too large)")
+    elif vdma_status & 0x4000:
+        print("  -> ERROR: Start of Frame Early (Stream out of sync)")
+    elif vdma_status == 0x10000:
+        print("  -> ERROR: Starving. No data received.")
+    print("----------------------------\n")
+    
+    
+    
+    
 # DISCLAIMER DISCLAIMER DISCLAIMER I DIDN'T WRITE ALL OF THESE
 
 # Adapted/converted from https://github.com/Digilent/Zybo-Z7-SW/blob/5d358aa3469869382f9fb515b65af3469775e3c8/src/Zybo-Z7-20-pcam-5c/src/ov5640/OV5640.h
 # Full credit to digilent and their work on the Zybo Z7-20 and OV5640 camera module. All I've done here is convert the register mappings to 
 # be python compatible.
-# All I really did was the conversion. If you'd like any more do it from the link above or ping me and I'll see if I have time.
-#
-# Additionally I will work on creating a better guide for what each register does since this is a mess of a system and doesn't have a proper guide anywhere.
-#
+
     
 cfg_1080p_30fps_336M_mipi = [
     #1920 x 1080 @ 30fps, RAW10, MIPISCLK=672, SCLK=67.2MHz, PCLK=134.4M
@@ -65,6 +133,20 @@ cfg_1080p_30fps_336M_mipi = [
     #VTS frame exposure time in # lines
     (0x380e, (1120 >> 8) & 0xFF),
     (0x380f, 1120 & 0xFF),
+    
+    #Change exposure auto settings
+    (0x3503, 0x06), # 0x06 == Turn off AEC and AGC
+    
+    # Manual Exposure
+    (0x3500, 0x00),
+    (0x3501, 0x38), # Was 0x30. - bumping up a bit helps
+    (0x3502, 0x00),
+    
+    # Manual Analog Gain                          !!!!!!!!!!!
+    (0x350A, 0x08), # High Byte of Gain
+    (0x350B, 0x80), # Low Byte of Gain\ 0x0880 seems to be the best gain for this
+    
+    
 
     #[7:4]=0x1 horizontal odd subsample increment, [3:0]=0x1 horizontal even subsample increment
     (0x3814, 0x11),
@@ -84,7 +166,7 @@ cfg_1080p_30fps_336M_mipi = [
     (0x3709, 0x52),
     (0x370c, 0x03),
 
-    #[7:4]=0x0 Formatter RAW, [3:0]=0x0 BGBG/GRGR set this val back to 0x00 at some point
+    #[7:4]=0x0 Formatter RAW, [3:0]=0x0 BGBG/GRGR
     (0x4300, 0x00),
     #[2:0]=0x3 Format select ISP RAW (DPC)
     (0x501f, 0x03)
@@ -105,44 +187,6 @@ cfg_init = [
     (0x3018, 0x00),
     #[6:4]=001 PLL charge pump, [3:0]=1000 MIPI 8-bit mode
     (0x3034, 0x18),
-
-    #              +----------------+        +------------------+         +---------------------+        +---------------------+
-    #XVCLK         | PRE_DIV0       |        | Mult (4+252)     |         | Sys divider (0=16)  |        | MIPI divider (0=16) |
-    #+-------+-----> 3037[3:0]=0001 +--------> 3036[7:0]=0x38   +---------> 3035[7:4]=0001      +--------> 3035[3:0]=0001      |
-    #12MHz   |     | / 1            | 12MHz  | * 56             | 672MHz  | / 1                 | 672MHz | / 1                 |
-    #        |     +----------------+        +------------------+         +----------+----------+        +----------+----------+
-    #        |                                                                       |                              |
-    #        |                                                                       |                      MIPISCLK|672MHz
-    #        |                                                                       |                              |
-    #        |     +----------------+        +------------------+         +----------v----------+        +----------v----------+
-    #        |     | PRE_DIVSP      |        | R_DIV_SP         |         | PLL R divider       |        | MIPI PHY            | MIPI_CLK
-    #        +-----> 303d[5:4]=01   +--------> 303d[2]=0 (+1)   |         | 3037[4]=1 (+1)      |        |                     +------->
-    #              | / 1.5          |  8MHz  | / 1              |         | / 2                 |        | / 2                 | 336MHz
-    #              +----------------+        +---------+--------+         +----------+----------+        +---------------------+
-    #                                                  |                             |
-    #                                                  |                             |
-    #                                                  |                             |
-    #              +----------------+        +---------v--------+         +----------v----------+        +---------------------+
-    #              | SP divider     |        | Mult             |         | BIT div (MIPI 8/10) |        | SCLK divider        | SCLK
-    #              | 303c[3:0]=0x1  +<-------+ 303b[4:0]=0x19   |         | 3034[3:0]=0x8)      +----+---> 3108[1:0]=01 (2^)   +------->
-    #              | / 1            | 200MHz | * 25             |         | / 2                 |    |   | / 2                 | 84MHz
-    #              +--------+-------+        +------------------+         +----------+----------+    |   +---------------------+
-    #                       |                                                        |               |
-    #                       |                                                        |               |
-    #                       |                                                        |               |
-    #              +--------v-------+                                     +----------v----------+    |   +---------------------+
-    #              | R_SELD5 div    | ADCCLK                              | PCLK div            |    |   | SCLK2x divider      |
-    #              | 303d[1:0]=001  +------->                             | 3108[5:4]=00 (2^)   |    +---> 3108[3:2]=00 (2^)   +------->
-    #              | / 1            | 200MHz                              | / 1                 |        | / 1                 | 168MHz
-    #              +----------------+                                     +----------+----------+        +---------------------+
-    #                                                                                |
-    #                                                                                |
-    #                                                                                |
-    #                                                                     +----------v----------+        +---------------------+
-    #                                                                     | P divider (* #lanes)| PCLK   | Scale divider       |
-    #                                                                     | 3035[3:0]=0001      +--------> 3824[4:0]           |
-    #                                                                     | / 1                 | 168MHz | / 2                 |
-    #                                                                     +---------------------+        +---------------------+
 
     #PLL1 configuration
     #[7:4]=0001 System clock divider /1, [3:0]=0001 Scale divider for MIPI /1
@@ -246,3 +290,129 @@ cfg_init = [
     #[7]=0 Special digital effects, [5]=0 scaling, [2]=0 UV average disabled, [1]=1 Color matrix enabled, [0]=1 Auto white balance enabled
     (0x5001, 0x03)
 ]
+
+
+
+# Overlay wrapper with a little extra functionality 
+def _LOAD_OVERLAY(ol_file):
+    print(f"Loading bitstream: {ol_file}")
+    ol = Overlay(ol_file)
+    
+    print("Overlay loaded. Printing IPs detected for debug.")
+
+    try: 
+        for ip_name, ip_info in ol.ip_dict.items():
+            ip_type = ip_info.get('type', 'Unknown Type')
+            phys_addr = hex(ip_info.get('phys_addr', 0))
+            print(f"{ip_name:<30} | {ip_type:<40} | {phys_addr}")
+
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+    
+    print ("\nOverlay initialized and IP printed (probably)\n\n")
+    
+    return ol
+
+
+
+# ENSURE I2C IS ENABLED FOR ALL PCAM OPERATIONS
+# built in delays for safety for all PCAM operations
+# must be run first to ensure camera is operating properly
+def _PCAM_CONFIGURE_BASE():
+    for reg, val in cfg_init:
+        write_cam_reg(reg, val)
+        time.sleep(0.005)
+    time.sleep(0.5)
+    print("PCAM5 Initialized.")
+    
+# configure standard resolution
+def _PCAM_CONFIGURE_1080p30():
+    for reg, val in cfg_1080p_30fps_336M_mipi:
+        write_cam_reg(reg, val)
+        time.sleep(0.005)
+    time.sleep(0.5)
+    print("PCAM5 resolutions and format set to 1920*1080@30fps over RAW10.\n")
+
+# Powercycle pcam
+def _PCAM_PC(pwup_pin):
+    print("Powering down camera...")
+    pwup_pin.write(0) 
+    time.sleep(0.1)
+
+    print("Powering up camera...")
+    pwup_pin.write(1)
+    time.sleep(.5)
+    
+def _PCAM_START_CAPTURE():
+    write_cam_reg(0x3008, 0x02) #starts the cam - MUST BE THE LAST COMMAND ISSUED... heavens this caused so many issues...
+    time.sleep(0.5)
+    print("PCAM5 started. Delaying to allow settling, flush=True")    
+    
+    
+    ###########
+# DEMOSAIC CONTROL #
+    ###########
+def _DEMOSAIC_CONFIG_RES(ol_id, width, height):
+    ol_id.write(0x10, width)     # 0x10  Width reg
+    ol_id.write(0x18, height)     # 0x18  Height reg
+    print(f"Demosaic set to {width}x{height} resolution\n")
+    
+def _DEMOSAIC_SET_BAYER(ol_id, bayer_pattern=0x00): #0x00 should be correct for pcam5 performed a "GSS" to figure this out :p
+    ol_id.write(0x28, bayer_pattern)
+    print(f"Demosaic set to Bayer pattern {bayer_pattern}\n")
+    
+def _DEMOSAIC_SET_CTRL(ol_id, val=0x81):
+    ol_id.write(0x00, val) 
+    print(f"Demosaic Control Reg Status: {hex(ol_id.read(0x00))}")
+    
+    
+    
+    
+    
+def _VDMA_CONFIG_WHOLISTIC(ol_id, frame_buffer, width, height):
+    print("Configuring VDMA", flush=True)
+    stride = width * 3  # 3 bytes per pixel for RGB888
+    ol_id.write(0x30, 0x4)        # Soft Reset
+
+    timeout = 20
+    while (ol_id.read(0x30) & 0x04) == 0x04:
+        time.sleep(0.05) 
+        timeout -= 1
+        if timeout == 0:
+            print("CRITICAL: VDMA Reset stuck!")
+            break
+
+    print("Reset settled. Arming VDMA.")
+    ol_id.write(0x30, 0x3)        # Start S2MM, Circular Mode
+
+    # VDAM is configured for 4 frame buffers in my version. adjust as needed
+    ol_id.write(0xAC, frame_buffer.device_address) 
+    ol_id.write(0xB0, frame_buffer.device_address) 
+    ol_id.write(0xB4, frame_buffer.device_address)  
+    ol_id.write(0xB8, frame_buffer.device_address)
+    
+    
+    # Set sizes
+    ol_id.write(0xA8, stride)                      
+    ol_id.write(0xA4, stride)                      
+    ol_id.write(0xA0, height)
+    print("VDMA Sizes set...")
+
+    time.sleep(0.5)
+    status = ol_id.read(0x34)
+    print(f" -> VDMA Armed. Status: {hex(status)}", flush=True)
+    if status == 0x10000:
+        print(" -> SUCCESS: VDMA is perfectly waiting for the camera!", flush=True)
+
+def _ALLOCATE_FRAME_BUFFER(width, height):
+    print(f"Allocating {width}x{height} frame buffer")
+    fb = allocate(shape=(height, width, 3), dtype=np.uint8)
+
+    print("Frame buffer allocated of requested size. Clearing buffer to gray for debugging.")
+    fb[:] = 128
+    fb.flush()
+    print(f" -> Buffer physical address: {hex(fb.device_address)}\n", flush=True)
+    return fb
+
+    
+print("\n\n\nALL PRE HARDWARE CONFIG AND DEFINITIONS COMPLETE. GOOD TO RUN... good luck :P\n\n\n")

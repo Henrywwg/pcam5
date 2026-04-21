@@ -1,20 +1,26 @@
 {
   "schema": "xilinx.com:schema:json_instance:1.0",
   "ip_inst": {
-    "xci_name": "pcam_AXI4_Stream_Crop_wra_0_0",
-    "cell_name": "AXI4_Stream_Crop_wra_0",
-    "component_reference": "xilinx.com:user:AXI4_Stream_Crop_wrapper:1.01",
-    "ip_revision": "1",
-    "gen_directory": "../../../../../../pcam5.gen/sources_1/bd/pcam/ip/pcam_AXI4_Stream_Crop_wra_0_0",
+    "xci_name": "pcam_AXI4_Stream_bounding_0_0",
+    "cell_name": "AXI4_Stream_bounding_0",
+    "component_reference": "xilinx.com:user:AXI4_Stream_bounding_box:1.0",
+    "ip_revision": "2",
+    "gen_directory": "../../../../../../pcam5.gen/sources_1/bd/pcam/ip/pcam_AXI4_Stream_bounding_0_0",
     "parameters": {
       "component_parameters": {
-        "IMG_WIDTH": [ { "value": "1920", "resolve_type": "user", "format": "long", "usage": "all" } ],
-        "IMG_HEIGHT": [ { "value": "1080", "resolve_type": "user", "format": "long", "usage": "all" } ],
-        "Component_Name": [ { "value": "pcam_AXI4_Stream_Crop_wra_0_0", "resolve_type": "user", "usage": "all" } ]
+        "DS_FACTOR": [ { "value": "4", "resolve_type": "user", "format": "long", "usage": "all" } ],
+        "DOWNSCALE_SIZE": [ { "value": "224", "resolve_type": "user", "format": "long", "usage": "all" } ],
+        "LINE_WIDTH": [ { "value": "10", "resolve_type": "user", "format": "long", "usage": "all" } ],
+        "INPUT_WIDTH": [ { "value": "1920", "resolve_type": "user", "format": "long", "usage": "all" } ],
+        "INPUT_HEIGHT": [ { "value": "1080", "resolve_type": "user", "format": "long", "usage": "all" } ],
+        "Component_Name": [ { "value": "pcam_AXI4_Stream_bounding_0_0", "resolve_type": "user", "usage": "all" } ]
       },
       "model_parameters": {
-        "IMG_WIDTH": [ { "value": "1920", "resolve_type": "generated", "format": "long", "usage": "all" } ],
-        "IMG_HEIGHT": [ { "value": "1080", "resolve_type": "generated", "format": "long", "usage": "all" } ]
+        "DS_FACTOR": [ { "value": "4", "resolve_type": "generated", "format": "long", "usage": "all" } ],
+        "DOWNSCALE_SIZE": [ { "value": "224", "resolve_type": "generated", "format": "long", "usage": "all" } ],
+        "LINE_WIDTH": [ { "value": "10", "resolve_type": "generated", "format": "long", "usage": "all" } ],
+        "INPUT_WIDTH": [ { "value": "1920", "resolve_type": "generated", "format": "long", "usage": "all" } ],
+        "INPUT_HEIGHT": [ { "value": "1080", "resolve_type": "generated", "format": "long", "usage": "all" } ]
       },
       "project_parameters": {
         "ARCHITECTURE": [ { "value": "zynquplus", "resolve_type": "generated", "usage": "all" } ],
@@ -31,9 +37,9 @@
       },
       "runtime_parameters": {
         "IPCONTEXT": [ { "value": "IP_Integrator" } ],
-        "IPREVISION": [ { "value": "1" } ],
+        "IPREVISION": [ { "value": "2" } ],
         "MANAGED": [ { "value": "TRUE" } ],
-        "OUTPUTDIR": [ { "value": "../../../../../../pcam5.gen/sources_1/bd/pcam/ip/pcam_AXI4_Stream_Crop_wra_0_0" } ],
+        "OUTPUTDIR": [ { "value": "../../../../../../pcam5.gen/sources_1/bd/pcam/ip/pcam_AXI4_Stream_bounding_0_0" } ],
         "SELECTEDSIMMODEL": [ { "value": "" } ],
         "SHAREDDIR": [ { "value": "../../ipshared" } ],
         "SWVERSION": [ { "value": "2025.2" } ],
@@ -143,5 +149,5 @@
       }
     }
   },
-  "checksum": "e3866a34"
+  "checksum": "49efda55"
 }
